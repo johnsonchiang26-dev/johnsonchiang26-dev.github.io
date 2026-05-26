@@ -578,6 +578,22 @@
         </div>
         <h3 data-en="SMS &amp; Email Anomaly Alerting Pipeline" data-zh="SMS 與 Email 異常預警系統">SMS &amp; Email Anomaly Alerting Pipeline</h3>
         <p data-en="End-to-end alerting system on AWS processing 90M+ SMS and 259M+ email records. 3-tier classification with historical baselines, incremental mode, and automated Lark notifications across 7 brands globally." data-zh="AWS 端到端預警系統，處理 9,000萬+ SMS 與 2.59億+ Email。3 層級分類搭配歷史基線、增量模式與自動 Lark 通知，覆蓋 7 個品牌全球市場。">End-to-end alerting system on AWS processing 90M+ SMS and 259M+ email records. 3-tier classification with historical baselines, incremental mode, and automated Lark notifications across 7 brands globally.</p>
+        <button class="project-expand-btn" onclick="toggleDetail(this)" data-en="More details" data-zh="展開詳情">
+          More details
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="project-detail">
+          <div class="project-detail-inner">
+            <ul class="detail-points">
+              <li data-en="Designed a 3-tier alert classification (P75 / P90 / P95) using rolling 4-week historical baselines per brand × country × scenario, replacing manual thresholds with data-driven percentile rules." data-zh="設計 3 層級告警分類（P75 / P90 / P95），基於品牌 × 國家 × 場景的 4 週滾動歷史基線，用數據驅動的百分位規則取代人工閾值。">Designed a 3-tier alert classification (P75 / P90 / P95) using rolling 4-week historical baselines per brand × country × scenario, replacing manual thresholds with data-driven percentile rules.</li>
+              <li data-en="Built incremental processing mode (--incremental --days 8) that reduced daily runtime from 13 minutes to 28 seconds by scanning only recent data instead of full-table recalculation." data-zh="建構增量處理模式（--incremental --days 8），僅掃描近期數據取代全表重算，將每日執行時間從 13 分鐘降至 28 秒。">Built incremental processing mode (--incremental --days 8) that reduced daily runtime from 13 minutes to 28 seconds by scanning only recent data instead of full-table recalculation.</li>
+              <li data-en="Backfilled 92.6M + 31.2M detail rows for country_name and ip_country_name columns; discovered and fixed a scenario category leakage bug that was excluding ~40% of SMS records from the pipeline." data-zh="回填 9,260 萬 + 3,120 萬筆 detail 資料的 country_name 與 ip_country_name 欄位；發現並修復場景分類遺漏 bug，該問題曾導致約 40% 的 SMS 記錄被排除在管線之外。">Backfilled 92.6M + 31.2M detail rows for country_name and ip_country_name columns; discovered and fixed a scenario category leakage bug that was excluding ~40% of SMS records from the pipeline.</li>
+              <li data-en="Investigated SMS fraud patterns — analyzed 1.1M verification requests, found 94% country mismatches, identified SMS Pumping attacks with Pakistan as the primary IP source." data-zh="調查 SMS 詐欺模式 — 分析 110 萬筆驗證請求，發現 94% 國家不匹配，識別 SMS Pumping 攻擊，巴基斯坦為主要攻擊 IP 來源。">Investigated SMS fraud patterns — analyzed 1.1M verification requests, found 94% country mismatches, identified SMS Pumping attacks with Pakistan as the primary IP source.</li>
+              <li data-en="Orchestrated via Airflow DAGs in Docker on AWS EC2. Alert results feed into Power BI dashboards for operations team monitoring across 7 brands and 16 SMS channels." data-zh="透過 AWS EC2 上的 Docker Airflow DAG 編排。告警結果匯入 Power BI 儀表板，供營運團隊監控 7 個品牌和 16 個 SMS 渠道。">Orchestrated via Airflow DAGs in Docker on AWS EC2. Alert results feed into Power BI dashboards for operations team monitoring across 7 brands and 16 SMS channels.</li>
+            </ul>
+            <div class="detail-tech">Stack — Python · Airflow · Docker · MySQL · Power BI · Lark API · AWS EC2</div>
+          </div>
+        </div>
         <div class="project-footer">
           <div class="project-stack"><span>Airflow</span><span>Docker</span><span>MySQL</span><span>Power BI</span></div>
           <div class="project-stat" data-en="Runtime <strong>13m → 28s</strong>" data-zh="執行時間 <strong>13分 → 28秒</strong>">Runtime <strong>13m → 28s</strong></div>
@@ -590,6 +606,20 @@
         </div>
         <h3 data-en="Social Welfare Prediction &amp; Care Assessment" data-zh="社會福利預測與關懷評估系統">Social Welfare Prediction &amp; Care Assessment</h3>
         <p data-en="Built a care assessment dashboard for low-income households using K-means clustering with PR-value ranking and data visualization. Helps social workers prioritize high-risk cases and track poverty trends across 26 townships." data-zh="建構低收入戶關懷評估儀表板，使用 K-means 分群搭配 PR 值排序與資料視覺化。協助社工人員優先處理高風險個案、追蹤脫貧趨勢，覆蓋 26 個鄉鎮市。">Built a care assessment dashboard for low-income households using K-means clustering with PR-value ranking and data visualization. Helps social workers prioritize high-risk cases and track poverty trends across 26 townships.</p>
+        <button class="project-expand-btn" onclick="toggleDetail(this)" data-en="More details" data-zh="展開詳情">
+          More details
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="project-detail">
+          <div class="project-detail-inner">
+            <ul class="detail-points">
+              <li data-en="Partnered with Changhua County government to digitize welfare case management. Clustered 10,000+ household records into risk tiers using K-means, with PR-value scoring to objectively rank urgency." data-zh="與彰化縣政府合作，將福利個案管理數位化。使用 K-means 將 10,000+ 筆家戶資料分群為風險層級，以 PR 值客觀排序急迫性。">Partnered with Changhua County government to digitize welfare case management. Clustered 10,000+ household records into risk tiers using K-means, with PR-value scoring to objectively rank urgency.</li>
+              <li data-en="Built a Tableau dashboard showing township-level poverty trends, enabling social workers to spot emerging high-risk areas before cases escalate." data-zh="建構 Tableau 儀表板呈現鄉鎮級脫貧趨勢，讓社工人員在個案惡化前提前發現高風險區域。">Built a Tableau dashboard showing township-level poverty trends, enabling social workers to spot emerging high-risk areas before cases escalate.</li>
+              <li data-en="Developed a Line Bot interface allowing field social workers to query household risk scores and cluster assignments on mobile, reducing response time for home visits." data-zh="開發 Line Bot 介面，讓外勤社工在手機上即時查詢家戶風險分數與分群結果，縮短家訪回應時間。">Developed a Line Bot interface allowing field social workers to query household risk scores and cluster assignments on mobile, reducing response time for home visits.</li>
+            </ul>
+            <div class="detail-tech">Stack — Python · K-means · Tableau · Line Bot API · Pandas</div>
+          </div>
+        </div>
         <div class="project-footer">
           <div class="project-stack"><span>K-means</span><span>Tableau</span><span>Line Bot</span><span>Python</span></div>
           <div class="project-stat" data-en="Coverage <strong>26 townships</strong>" data-zh="覆蓋 <strong>26 鄉鎮市</strong>">Coverage <strong>26 townships</strong></div>
@@ -614,6 +644,20 @@
         </div>
         <h3 data-en="MBTI × Horoscope AI Fortune Platform" data-zh="MBTI × 星座 AI 運勢平台">MBTI × Horoscope AI Fortune Platform</h3>
         <p data-en="Full-stack AI app combining MBTI personality types with daily horoscope data. Scheduled crawlers collect fortune data, LLM API generates personalized advice for 192 combinations (16 MBTI × 12 zodiac), and users can share dynamic fortune cards with radar chart scores." data-zh="結合 MBTI 人格類型與每日星座運勢的全端 AI 應用。定時爬蟲採集運勢數據，LLM API 為 192 種組合（16 MBTI × 12 星座）生成個人化建議，用戶可分享含雷達圖分數的動態運勢卡片。">Full-stack AI app combining MBTI personality types with daily horoscope data. Scheduled crawlers collect fortune data, LLM API generates personalized advice for 192 combinations (16 MBTI × 12 zodiac), and users can share dynamic fortune cards with radar chart scores.</p>
+        <button class="project-expand-btn" onclick="toggleDetail(this)" data-en="More details" data-zh="展開詳情">
+          More details
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="project-detail">
+          <div class="project-detail-inner">
+            <ul class="detail-points">
+              <li data-en="Architected a daily pipeline: cron-scheduled crawlers scrape horoscope data for 12 zodiac signs, then an LLM API call generates unique fortune advice for each of the 192 MBTI × zodiac combinations — fully automated, zero manual input." data-zh="設計每日自動管線：定時爬蟲抓取 12 星座運勢數據，再由 LLM API 為 192 種 MBTI × 星座組合生成專屬運勢建議 — 全自動化，無需人工介入。">Architected a daily pipeline: cron-scheduled crawlers scrape horoscope data for 12 zodiac signs, then an LLM API call generates unique fortune advice for each of the 192 MBTI × zodiac combinations — fully automated, zero manual input.</li>
+              <li data-en="Built dynamic image generation using Pillow: each fortune card composites a character illustration, radar chart (love / work / money / health / overall), and personalized text — designed for social media sharing." data-zh="使用 Pillow 建構動態圖片生成：每張運勢卡片合成角色插圖、雷達圖（愛情/事業/財運/健康/整體）與個人化文字 — 專為社群分享設計。">Built dynamic image generation using Pillow: each fortune card composites a character illustration, radar chart (love / work / money / health / overall), and personalized text — designed for social media sharing.</li>
+              <li data-en="Full-stack deployment: FastAPI backend with PostgreSQL on AWS EC2, RESTful API endpoints for frontend consumption, and structured prompt engineering to ensure consistent LLM output formatting." data-zh="全端部署：FastAPI 後端搭配 PostgreSQL 於 AWS EC2，RESTful API 供前端取用，搭配結構化 prompt engineering 確保 LLM 輸出格式一致。">Full-stack deployment: FastAPI backend with PostgreSQL on AWS EC2, RESTful API endpoints for frontend consumption, and structured prompt engineering to ensure consistent LLM output formatting.</li>
+            </ul>
+            <div class="detail-tech">Stack — FastAPI · PostgreSQL · Claude API · Pillow · AWS EC2 · Cron</div>
+          </div>
+        </div>
         <div class="project-footer">
           <div class="project-stack"><span>FastAPI</span><span>PostgreSQL</span><span>LLM API</span><span>Pillow</span><span>AWS EC2</span></div>
           <div class="project-stat" data-en="<strong>192</strong> combos" data-zh="<strong>192</strong> 種組合"><strong>192</strong> combos</div>
