@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Johnson Chiang — Data & AI Engineer</title>
+  <meta name="description" content="Portfolio of Johnson Chiang (姜育昇) — AI/ML Engineer, financial time series, data pipelines, LLM agents." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --cream: #FAF7F2;
+      --warm-white: #F3EDE4;
+      --ink: #1a1a1a;
+      --ink-light: #4a4a4a;
+      --ink-muted: #8a8580;
+      --terracotta: #C4603C;
+      --terracotta-light: rgba(196,96,60,0.08);
+      --slate: #3D5A6E;
+      --slate-light: rgba(61,90,110,0.08);
+      --sage: #6B7F5E;
+      --border: #DDD6CA;
+      --border-light: #E8E2D8;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+      --sans-tc: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body.zh { font-family: var(--sans-tc), var(--sans); }
+
+    ::selection { background: var(--terracotta); color:#fff; }
+
+    a {
+      color: var(--terracotta);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    a:hover { border-bottom-color: var(--terracotta); }
+
+    /* ═══ NAV ═══ */
+    .nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      transition: all 0.35s ease;
+    }
+    .nav-inner {
+      max-width:1200px; margin:0 auto; padding:1.25rem 2.5rem;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .nav.scrolled {
+      background:rgba(250,247,242,0.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border-light);
+    }
+    .nav-name {
+      font-family: var(--serif);
+      font-size:1.1rem; color:var(--ink);
+    }
+    .nav-right {
+      display:flex; align-items:center; gap:2rem;
+    }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a {
+      font-size:0.82rem; font-weight:500; color:var(--ink-muted);
+      letter-spacing:0.04em; text-transform:uppercase; border-bottom:none;
+      transition:color 0.2s;
+    }
+    .nav-links a:hover { color:var(--ink); border-bottom:none; }
+
+    .lang-btn {
+      font-family:var(--mono); font-size:0.72rem; letter-spacing:0.05em;
+      background:none; border:1.5px solid var(--border);
+      color:var(--ink-muted); padding:0.3rem 0.7rem; border-radius:3px;
+      cursor:pointer; transition:all 0.2s; white-space:nowrap;
+    }
+    .lang-btn:hover { border-color:var(--terracotta); color:var(--terracotta); }
+
+    .nav-toggle {
+      display:none; background:none; border:none; cursor:pointer;
+      width:26px; height:18px; position:relative;
+    }
+    .nav-toggle span {
+      display:block; width:100%; height:1.5px; background:var(--ink);
+      position:absolute; left:0; transition:0.3s;
+    }
+    .nav-toggle span:nth-child(1){top:0}
+    .nav-toggle span:nth-child(2){top:8px}
+    .nav-toggle span:nth-child(3){top:16px}
+
+    /* ═══ HERO ═══ */
+    .hero {
+      min-height:100vh; display:flex; align-items:center;
+      padding:6rem 2.5rem 4rem; max-width:1200px; margin:0 auto;
+    }
+    .hero-content { max-width:720px; }
+    .hero-greeting {
+      font-family:var(--mono); font-size:0.8rem; color:var(--terracotta);
+      letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1.75rem;
+      opacity:0; animation:enter 0.7s ease forwards 0.1s;
+    }
+    .hero h1 {
+      font-family:var(--serif); font-size:clamp(2.6rem,6vw,4.5rem);
+      font-weight:400; line-height:1.12; letter-spacing:-0.025em;
+      margin-bottom:0.5rem; opacity:0; animation:enter 0.7s ease forwards 0.25s;
+    }
+    body.zh .hero h1 {
+      font-family: var(--sans-tc);
+      font-weight: 700;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      letter-spacing: 0.02em;
+    }
+    .hero h1 em { font-style:italic; color:var(--ink-light); }
+    .hero-sub {
+      font-family:var(--serif); font-size:clamp(1.05rem,2.2vw,1.4rem);
+      color:var(--ink-muted); font-style:italic; margin-bottom:2.25rem;
+      opacity:0; animation:enter 0.7s ease forwards 0.35s;
+    }
+    body.zh .hero-sub { font-family:var(--sans-tc); font-style:normal; font-weight:300; }
+    .hero-bio {
+      font-size:1.02rem; line-height:1.85; color:var(--ink-light); max-width:580px;
+      opacity:0; animation:enter 0.7s ease forwards 0.45s;
+    }
+    .hero-actions {
+      margin-top:2.5rem; display:flex; gap:1.25rem; flex-wrap:wrap;
+      opacity:0; animation:enter 0.7s ease forwards 0.6s;
+    }
+
+    .btn {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      padding:0.8rem 2rem; font-family:var(--sans); font-size:0.85rem;
+      font-weight:600; letter-spacing:0.04em; border-radius:2px;
+      cursor:pointer; transition:all 0.25s; border:none;
+    }
+    .btn-fill { background:var(--ink); color:var(--cream); }
+    .btn-fill:hover { background:var(--terracotta); color:#fff; border-bottom:none; }
+    .btn-outline { background:transparent; color:var(--ink); border:1.5px solid var(--ink); }
+    .btn-outline:hover { background:var(--ink); color:var(--cream); border-bottom-color:var(--ink); }
+
+    /* ═══ SECTION COMMON ═══ */
+    .divider { max-width:1200px; margin:0 auto; padding:0 2.5rem; }
+    .divider hr { border:none; border-top:1px solid var(--border); }
+
+    .section { max-width:1200px; margin:0 auto; padding:5rem 2.5rem; }
+
+    .section-header {
+      display:flex; align-items:baseline; gap:1rem; margin-bottom:3rem;
+    }
+    .section-num {
+      font-family:var(--mono); font-size:0.75rem; color:var(--terracotta);
+    }
+    .section-heading {
+      font-family:var(--serif); font-size:clamp(1.5rem,3vw,2.2rem);
+      font-weight:400; letter-spacing:-0.01em;
+    }
+    body.zh .section-heading {
+      font-family:var(--sans-tc); font-weight:700;
+      font-size:clamp(1.4rem,2.8vw,2rem);
+    }
+    .section-line { flex:1; height:1px; background:var(--border); margin-left:1rem; }
+
+    /* ═══ SKILLS ═══ */
+    .skills-row {
+      display:grid; grid-template-columns:repeat(5,1fr);
+      border:1px solid var(--border); border-radius:3px; overflow:hidden;
+    }
+    .skill-col {
+      padding:1.75rem 1.5rem; border-right:1px solid var(--border);
+      transition:background 0.25s;
+    }
+    .skill-col:last-child { border-right:none; }
+    .skill-col:hover { background:var(--warm-white); }
+    .skill-col h3 {
+      font-family:var(--mono); font-size:0.65rem; letter-spacing:0.12em;
+      text-transform:uppercase; color:var(--terracotta); margin-bottom:0.85rem;
+    }
+    .skill-col p { font-size:0.85rem; line-height:1.65; color:var(--ink-light); }
+
+    /* ═══ EXPERIENCE ═══ */
+    .exp-entry {
+      display:grid; grid-template-columns:200px 1fr; gap:3rem;
+      padding:2.5rem 0; border-bottom:1px solid var(--border-light);
+    }
+    .exp-entry:first-of-type { padding-top:0; }
+    .exp-entry:last-of-type { border-bottom:none; }
+    .exp-dates { font-family:var(--mono); font-size:0.78rem; color:var(--ink-muted); margin-bottom:0.25rem; }
+    .exp-company-name { font-family:var(--serif); font-size:0.95rem; font-style:italic; color:var(--ink-light); }
+    body.zh .exp-company-name { font-family:var(--sans-tc); font-style:normal; }
+    .exp-body h3 { font-family:var(--serif); font-size:1.3rem; font-weight:600; margin-bottom:0.35rem; }
+    body.zh .exp-body h3 { font-family:var(--sans-tc); font-weight:700; font-size:1.2rem; }
+    .exp-label {
+      font-family:var(--mono); font-size:0.65rem; letter-spacing:0.1em;
+      text-transform:uppercase; color:var(--ink-muted); margin-top:1.25rem; margin-bottom:0.6rem;
+    }
+    .exp-points { list-style:none; }
+    .exp-points li {
+      position:relative; padding-left:1.25rem; margin-bottom:0.45rem;
+      font-size:0.92rem; line-height:1.65; color:var(--ink-light);
+    }
+    .exp-points li::before {
+      content:''; position:absolute; left:0; top:0.65em;
+      width:5px; height:1px; background:var(--terracotta);
+    }
+
+    /* ═══ PROJECTS ═══ */
+    .projects-grid {
+      display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem;
+    }
+    .project {
+      background:var(--warm-white); border:1px solid var(--border-light);
+      border-radius:4px; padding:2rem; transition:all 0.3s; display:flex;
+      flex-direction:column;
+    }
+    .project:hover {
+      border-color:var(--border); transform:translateY(-3px);
+      box-shadow:0 8px 30px rgba(0,0,0,0.06);
+    }
+    .project-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; }
+    .project-category {
+      font-family:var(--mono); font-size:0.62rem; letter-spacing:0.1em;
+      text-transform:uppercase; color:var(--slate); background:var(--slate-light);
+      padding:0.25rem 0.6rem; border-radius:2px;
+    }
+    .project-category.thesis { color:var(--terracotta); background:var(--terracotta-light); }
+    .project-category.work { color:var(--sage); background:rgba(107,127,94,0.1); }
+    .project h3 {
+      font-family:var(--serif); font-size:1.15rem; font-weight:600;
+      line-height:1.35; margin-bottom:0.6rem;
+    }
+    body.zh .project h3 { font-family:var(--sans-tc); font-weight:700; font-size:1.1rem; }
+    .project p { font-size:0.88rem; line-height:1.7; color:var(--ink-light); flex:1; }
+    .project-footer {
+      margin-top:1.25rem; padding-top:1rem; border-top:1px solid var(--border-light);
+      display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:0.75rem;
+    }
+    .project-stack { display:flex; flex-wrap:wrap; gap:0.35rem; }
+    .project-stack span {
+      font-family:var(--mono); font-size:0.62rem; color:var(--ink-muted);
+      background:rgba(0,0,0,0.04); padding:0.15rem 0.5rem; border-radius:2px;
+    }
+    .project-stat {
+      font-family:var(--mono); font-size:0.7rem; color:var(--ink-muted);
+      text-align:right; white-space:nowrap;
+    }
+    .project-stat strong { color:var(--terracotta); font-weight:500; }
+
+    /* ═══ PUBLICATIONS ═══ */
+    .pub {
+      padding:1.5rem 0; border-bottom:1px solid var(--border-light);
+      display:grid; grid-template-columns:80px 1fr; gap:1.5rem; align-items:baseline;
+    }
+    .pub:first-of-type { padding-top:0; }
+    .pub:last-of-type { border-bottom:none; }
+    .pub-type { font-family:var(--mono); font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; }
+    .pub-type.scie { color:var(--terracotta); }
+    .pub-type.journal { color:var(--sage); }
+    .pub-type.conf { color:var(--slate); }
+    .pub-body h3 { font-size:0.95rem; font-weight:500; line-height:1.5; margin-bottom:0.25rem; }
+    .pub-citation { font-size:0.82rem; color:var(--ink-muted); line-height:1.5; }
+    .pub-note { font-family:var(--mono); font-size:0.68rem; color:var(--ink-muted); margin-top:0.15rem; }
+
+    /* ═══ EDUCATION ═══ */
+    .edu-row { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+    .edu-card { padding:2rem; border:1px solid var(--border); border-radius:3px; }
+    .edu-card h3 { font-family:var(--serif); font-size:1.15rem; font-weight:600; margin-bottom:0.2rem; }
+    body.zh .edu-card h3 { font-family:var(--sans-tc); font-weight:700; font-size:1.1rem; }
+    .edu-school { font-size:0.9rem; color:var(--terracotta); margin-bottom:0.2rem; }
+    .edu-year { font-family:var(--mono); font-size:0.78rem; color:var(--ink-muted); margin-bottom:0.75rem; }
+    .edu-card p { font-size:0.85rem; color:var(--ink-light); font-style:italic; line-height:1.55; }
+    body.zh .edu-card p { font-style:normal; }
+
+    /* ═══ CONTACT ═══ */
+    .contact { text-align:center; padding:6rem 2.5rem 5rem; max-width:1200px; margin:0 auto; }
+    .contact-heading {
+      font-family:var(--serif); font-size:clamp(1.8rem,4vw,2.8rem);
+      font-weight:400; margin-bottom:1rem;
+    }
+    body.zh .contact-heading { font-family:var(--sans-tc); font-weight:700; font-size:clamp(1.6rem,3.5vw,2.4rem); }
+    .contact-text { font-size:1rem; color:var(--ink-light); max-width:480px; margin:0 auto 2rem; line-height:1.8; }
+    .contact-row { display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap; }
+    .contact-item {
+      font-family:var(--mono); font-size:0.82rem; color:var(--ink-muted);
+      display:flex; align-items:center; gap:0.5rem; border-bottom:none; transition:color 0.2s;
+    }
+    .contact-item:hover { color:var(--terracotta); border-bottom:none; }
+    .contact-item svg { width:15px; height:15px; flex-shrink:0; }
+
+    /* ═══ FOOTER ═══ */
+    .footer {
+      text-align:center; padding:2rem 2.5rem; border-top:1px solid var(--border);
+      font-family:var(--mono); font-size:0.7rem; color:var(--ink-muted);
+    }
+
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes enter {
+      from { opacity:0; transform:translateY(18px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+    .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.5s,transform 0.5s; }
+    .fade-in.show { opacity:1; transform:translateY(0); }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media(max-width:900px) {
+      .skills-row { grid-template-columns:repeat(2,1fr); }
+      .skill-col { border-bottom:1px solid var(--border); }
+      .skill-col:nth-child(2n) { border-right:none; }
+      .skill-col:nth-last-child(-n+2) { border-bottom:none; }
+      .projects-grid { grid-template-columns:1fr; }
+      .exp-entry { grid-template-columns:1fr; gap:0.5rem; }
+      .pub { grid-template-columns:1fr; gap:0.35rem; }
+      .edu-row { grid-template-columns:1fr; }
+    }
+    @media(max-width:640px) {
+      .nav-inner { padding:1rem 1.5rem; }
+      .nav-links { display:none; }
+      .nav-toggle { display:block; }
+      .nav-links.open {
+        display:flex; flex-direction:column; position:absolute;
+        top:100%; left:0; right:0; background:rgba(250,247,242,0.97);
+        backdrop-filter:blur(12px); padding:1.5rem; gap:1rem;
+        border-bottom:1px solid var(--border);
+      }
+      .hero { padding:5rem 1.5rem 3rem; }
+      .section { padding:3.5rem 1.5rem; }
+      .divider { padding:0 1.5rem; }
+      .contact { padding:4rem 1.5rem 3.5rem; }
+      .skills-row { grid-template-columns:1fr; }
+      .skill-col { border-right:none; border-bottom:1px solid var(--border); }
+      .skill-col:last-child { border-bottom:none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-name">Johnson Chiang</div>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#experience" data-en="Experience" data-zh="經歷">Experience</a></li>
+        <li><a href="#projects" data-en="Projects" data-zh="專案">Projects</a></li>
+        <li><a href="#contact" data-en="Contact" data-zh="聯絡">Contact</a></li>
+      </ul>
+      <button class="lang-btn" id="langBtn" onclick="toggleLang()">中文</button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-greeting" data-en="DATA & AI ENGINEER" data-zh="Data & AI Engineer">DATA & AI ENGINEER</div>
+    <h1 data-en="Proving it <em>with data</em>" data-zh="讓數據<em>說話</em>">Proving it <em>with data</em></h1>
+    <div class="hero-sub" data-en="姜育昇 — Taipei, Taiwan" data-zh="姜育昇 — 台北，台灣">姜育昇 — Taipei, Taiwan</div>
+    <p class="hero-bio" data-en="I fell in love with data in college — the idea that you could prove something, settle an argument, or uncover a pattern just by looking at the numbers. To back up my code with real credibility, I went on to earn an M.S. in Computer Science, where my thesis on financial time series forecasting was published in a SCIE journal. Now I build the data infrastructure that makes good decisions possible: ETL pipelines processing 350M+ records, anomaly alerting systems, and LLM-powered analytics tools on AWS — all running in production, every day." data-zh="大學時期愛上了數據 — 喜歡用數據證明一件事、發現一個規律。為了讓我寫的程式和分析更有說服力，我去念了資工碩士，碩論研究金融時間序列預測並發表於 SCIE 期刊。現在我在做的事是建構讓好決策成為可能的數據基礎建設：處理 3.5 億+ 筆資料的 ETL Pipeline、異常預警系統、以及 LLM 驅動的分析工具，全部跑在 AWS 上，每天穩定運行。">I fell in love with data in college — the idea that you could prove something, settle an argument, or uncover a pattern just by looking at the numbers. To back up my code with real credibility, I went on to earn an M.S. in Computer Science, where my thesis on financial time series forecasting was published in a SCIE journal. Now I build the data infrastructure that makes good decisions possible: ETL pipelines processing 350M+ records, anomaly alerting systems, and LLM-powered analytics tools on AWS — all running in production, every day.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-fill" data-en="View Work" data-zh="查看專案">View Work</a>
+    </div>
+  </div>
+</header>
+
+<div class="divider"><hr/></div>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="fade-in">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-heading" data-en="Expertise" data-zh="核心技能">Expertise</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-row">
+      <div class="skill-col">
+        <h3>ML / AI</h3>
+        <p data-en="Time Series (LSTM, RNN, Attention), Feature Engineering, Multi-output Prediction, Fuzzy Logic, LLM Agents with RAG" data-zh="時間序列（LSTM、RNN、Attention）、特徵工程與選取、多輸出迴歸/分類、模糊邏輯、LLM Agent（RAG、多角色編排）">Time Series (LSTM, RNN, Attention), Feature Engineering, Multi-output Prediction, Fuzzy Logic, LLM Agents with RAG</p>
+      </div>
+      <div class="skill-col">
+        <h3 data-en="Frameworks" data-zh="框架">Frameworks</h3>
+        <p>PyTorch, TensorFlow, scikit-learn, XGBoost, SVR, SVM, Random Forest, Pandas, NumPy</p>
+      </div>
+      <div class="skill-col">
+        <h3 data-en="Infrastructure" data-zh="基礎建設">Infrastructure</h3>
+        <p>AWS EC2 / Bedrock / S3, Docker, Airflow, FastAPI, MySQL, PostgreSQL, Linux</p>
+      </div>
+      <div class="skill-col">
+        <h3 data-en="Languages" data-zh="語言與工具">Languages</h3>
+        <p>Python, SQL, R, Git, Claude Code</p>
+      </div>
+      <div class="skill-col">
+        <h3 data-en="Visualization" data-zh="視覺化">Visualization</h3>
+        <p>Power BI, Tableau, Matplotlib, R Shiny</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr/></div>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="fade-in">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-heading" data-en="Experience" data-zh="工作經歷">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-meta">
+        <div class="exp-dates">2025.01 — Present</div>
+        <div class="exp-company-name">Hytech (FinTech)</div>
+      </div>
+      <div class="exp-body">
+        <h3 data-en="Data Analyst" data-zh="數據分析師">Data Analyst</h3>
+
+        <div class="exp-label" data-en="LLM Applications & Alerting" data-zh="LLM 應用與預警系統">LLM Applications & Alerting</div>
+        <ul class="exp-points">
+          <li data-en="Designed 4-role AI Agent (Planner → Executor → Analyst → Reporter) on AWS Bedrock for NL querying of SMS analytics. 5+ debug iterations fixing hallucination, brand mapping, and query handling." data-zh="設計 4 角色 AI Agent（Planner→Executor→Analyst→Reporter）於 AWS Bedrock，自然語言查詢 SMS 數據。迭代 5+ 輪修正 hallucination、品牌映射、查詢類型處理。">Designed 4-role AI Agent (Planner → Executor → Analyst → Reporter) on AWS Bedrock for NL querying of SMS analytics. 5+ debug iterations fixing hallucination, brand mapping, and query handling.</li>
+          <li data-en="Built 3-tier anomaly alerting (P75/P90/P95) with daily batch against historical baselines. Incremental mode: 13 min → 28 sec." data-zh="建構 3 層級異常預警系統（P75/P90/P95 閾值），每日批次比對歷史基線。Incremental 模式將執行時間從 13 分鐘降至 28 秒。">Built 3-tier anomaly alerting (P75/P90/P95) with daily batch against historical baselines. Incremental mode: 13 min → 28 sec.</li>
+        </ul>
+
+        <div class="exp-label" data-en="Data Engineering" data-zh="數據工程">Data Engineering</div>
+        <ul class="exp-points">
+          <li data-en="ETL pipelines on AWS EC2 (Airflow + Docker) processing 90M+ SMS and 259M+ email records, automated daily." data-zh="AWS EC2 ETL Pipeline（Airflow + Docker），處理 9,000萬+ SMS 與 2.59億+ Email，每日自動排程。">ETL pipelines on AWS EC2 (Airflow + Docker) processing 90M+ SMS and 259M+ email records, automated daily.</li>
+          <li data-en="Partner/IB recursive referral chain pipeline across 14.8M+ user relationships for daily commission reconciliation." data-zh="Partner/IB 遞迴返傭鏈路分析，每日 1,480萬+ 筆用戶關係，支撐佣金對帳。">Partner/IB recursive referral chain pipeline across 14.8M+ user relationships for daily commission reconciliation.</li>
+          <li data-en="SMS fraud detection: IP-vs-phone geolocation on 1.1M requests, 94% country mismatch, identified credential-stuffing patterns." data-zh="SMS 刷量預警：IP 與手機國家比對 110 萬筆請求，94% 國家不一致率，識別 credential-stuffing 刷量模式。">SMS fraud detection: IP-vs-phone geolocation on 1.1M requests, 94% country mismatch, identified credential-stuffing patterns.</li>
+        </ul>
+
+        <div class="exp-label" data-en="Project Management" data-zh="專案管理">Project Management</div>
+        <ul class="exp-points">
+          <li data-en="Owned 3 product modules, interfacing with multiple PMs and RD teams — independently clarifying requirements, proposing data solutions, managing timelines." data-zh="負責 3 個產品模組，對接多位 PM 及 RD 團隊，獨立釐清需求、提供數據解決方案、管控時程與任務拆分。">Owned 3 product modules, interfacing with multiple PMs and RD teams — independently clarifying requirements, proposing data solutions, managing timelines.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-meta">
+        <div class="exp-dates">2023.11 — 2025.01</div>
+        <div class="exp-company-name" data-en="Advantech" data-zh="研華科技 Advantech">Advantech</div>
+      </div>
+      <div class="exp-body">
+        <h3 data-en="RPA &amp; DBA Developer" data-zh="RPA 與 DBA 開發工程師">RPA &amp; DBA Developer</h3>
+        <ul class="exp-points">
+          <li data-en="Multiple RPA projects (Automation Anywhere), ~30hr/project/month saved." data-zh="多個 RPA 專案（Automation Anywhere），每專案月省 30 小時。">Multiple RPA projects (Automation Anywhere), ~30hr/project/month saved.</li>
+          <li data-en="MSSQL + SQL Server Audit; two-factory consolidation, zero downtime." data-zh="MSSQL + SQL Server Audit；兩廠併廠零停機。">MSSQL + SQL Server Audit; two-factory consolidation, zero downtime.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr/></div>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="fade-in">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-heading" data-en="Selected Projects" data-zh="精選專案">Selected Projects</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="project">
+        <div class="project-top">
+          <span class="project-category thesis" data-en="Thesis · SCIE" data-zh="碩士論文 · SCIE">Thesis · SCIE</span>
+        </div>
+        <h3 data-en="Knowledge-Driven Financial Time Series Forecasting" data-zh="知識驅動的金融時間序列預測">Knowledge-Driven Financial Time Series Forecasting</h3>
+        <p data-en="Quantified technical indicator knowledge — MA crossovers, KD zones, MACD slope — into engineered features. Multi-output models predict next-day OHLC changes. Knowledge features consistently outperformed raw price-volume data." data-zh="將技術指標知識（MA交叉、KD超買超賣區、MACD斜率）量化為特徵，搭配 SVR、XGBoost、LSTM Attention 多輸出模型預測隔日 OHLC 漲跌幅。知識特徵顯著優於原始量價資料。">Quantified technical indicator knowledge — MA crossovers, KD zones, MACD slope — into engineered features. Multi-output models predict next-day OHLC changes. Knowledge features consistently outperformed raw price-volume data.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>PyTorch</span><span>scikit-learn</span><span>XGBoost</span><span>LSTM Attention</span></div>
+          <div class="project-stat" data-en="Published in <strong>JISE</strong>" data-zh="發表於 <strong>JISE</strong>">Published in <strong>JISE</strong></div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <span class="project-category work" data-en="Production · Hytech" data-zh="生產環境 · 海科科技">Production · Hytech</span>
+        </div>
+        <h3 data-en="SMS &amp; Email Anomaly Alerting Pipeline" data-zh="SMS 與 Email 異常預警系統">SMS &amp; Email Anomaly Alerting Pipeline</h3>
+        <p data-en="End-to-end alerting system on AWS processing 90M+ SMS and 259M+ email records. 3-tier classification with historical baselines, incremental mode, and automated Lark notifications across 7 brands globally." data-zh="AWS 端到端預警系統，處理 9,000萬+ SMS 與 2.59億+ Email。3 層級分類搭配歷史基線、增量模式與自動 Lark 通知，覆蓋 7 個品牌全球市場。">End-to-end alerting system on AWS processing 90M+ SMS and 259M+ email records. 3-tier classification with historical baselines, incremental mode, and automated Lark notifications across 7 brands globally.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>Airflow</span><span>Docker</span><span>MySQL</span><span>Power BI</span></div>
+          <div class="project-stat" data-en="Runtime <strong>13m → 28s</strong>" data-zh="執行時間 <strong>13分 → 28秒</strong>">Runtime <strong>13m → 28s</strong></div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <span class="project-category" data-en="Gov't · SYSTEX" data-zh="政府專案 · 精誠集團">Gov't · SYSTEX</span>
+        </div>
+        <h3 data-en="Social Welfare Prediction &amp; Care Assessment" data-zh="社會福利預測與關懷評估系統">Social Welfare Prediction &amp; Care Assessment</h3>
+        <p data-en="AI prediction model for low-income household applications (XGBoost, 84.93% accuracy) and a care assessment dashboard using K-means clustering with PR-value ranking. Helps social workers prioritize cases across 26 townships." data-zh="低收入戶申請 AI 預測模型（XGBoost，準確度 84.93%）與關懷評估儀表板，使用 K-means 分群搭配 PR 值排序。協助社工人員優先處理高風險個案，覆蓋 26 個鄉鎮市。">AI prediction model for low-income household applications (XGBoost, 84.93% accuracy) and a care assessment dashboard using K-means clustering with PR-value ranking. Helps social workers prioritize cases across 26 townships.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>XGBoost</span><span>K-means</span><span>Tableau</span><span>Line Bot</span></div>
+          <div class="project-stat" data-en="Accuracy <strong>84.93%</strong>" data-zh="準確度 <strong>84.93%</strong>">Accuracy <strong>84.93%</strong></div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <span class="project-category" data-en="Kaggle · Merkle" data-zh="Kaggle · Merkle 實習">Kaggle · Merkle</span>
+        </div>
+        <h3 data-en="Store Sales Time Series Forecasting" data-zh="超市銷售額時間序列預測">Store Sales Time Series Forecasting</h3>
+        <p data-en="Predicted sales for Corporación Favorita across 54 stores and 33 product families. Thorough data cleaning — pre-launch zeros, oil price interpolation, duplicate holiday resolution — then compared Random Forest vs XGBoost." data-zh="預測厄瓜多 Corporación Favorita 超市 54 間門市、33 類商品銷售額。完整資料清洗（移除未開賣零值、油價線性插值、重複假日事件處理），比較 Random Forest 與 XGBoost。">Predicted sales for Corporación Favorita across 54 stores and 33 product families. Thorough data cleaning — pre-launch zeros, oil price interpolation, duplicate holiday resolution — then compared Random Forest vs XGBoost.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>Random Forest</span><span>XGBoost</span><span>Pandas</span></div>
+          <div class="project-stat">RMSLE <strong>0.64</strong> · #<strong>660</strong></div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <span class="project-category" data-en="Side Project" data-zh="個人專案">Side Project</span>
+        </div>
+        <h3 data-en="MBTI × Horoscope AI Fortune Platform" data-zh="MBTI × 星座 AI 運勢平台">MBTI × Horoscope AI Fortune Platform</h3>
+        <p data-en="Full-stack AI app with scheduled crawlers for fortune data, LLM API for personalized advice, and shareable fortune-card image generation. Deployed on AWS EC2." data-zh="FastAPI + PostgreSQL 全端 AI 應用，爬蟲定時採集運勢數據，LLM API 產生個人化建議與分享圖片功能，部署於 AWS EC2。">Full-stack AI app with scheduled crawlers for fortune data, LLM API for personalized advice, and shareable fortune-card image generation. Deployed on AWS EC2.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>FastAPI</span><span>PostgreSQL</span><span>LLM API</span><span>AWS EC2</span></div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <span class="project-category" data-en="Freelance" data-zh="接案">Freelance</span>
+        </div>
+        <h3 data-en="Manufacturing Equipment Anomaly Prediction" data-zh="製造設備異常預測">Manufacturing Equipment Anomaly Prediction</h3>
+        <p data-en="Statistical feature engineering on sensor time-series data for proactive anomaly detection before equipment failures." data-zh="時間序列感測器統計特徵工程，分類模型實現機台異常提前預測。">Statistical feature engineering on sensor time-series data for proactive anomaly detection before equipment failures.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>scikit-learn</span><span>Feature Eng.</span><span>Time Series</span></div>
+          <div class="project-stat">Precision <strong>.78</strong> · F1 <strong>.70</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr/></div>
+
+<!-- PUBLICATIONS -->
+<section class="section" id="publications">
+  <div class="fade-in">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-heading" data-en="Publications" data-zh="學術發表">Publications</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-type scie">SCIE</div>
+      <div class="pub-body">
+        <h3>Intelligent System for Stock Investment Decision Making</h3>
+        <div class="pub-citation">Lee, C.H., Lee, T.J., <strong>Chiang, Y.S.</strong> et al. (2023). <em>JISE</em>, 39(5), 1101–1116.</div>
+        <div class="pub-note" data-en="Contribution — Partial implementation" data-zh="貢獻 — 部分程式邏輯">Contribution — Partial implementation</div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-type journal">Journal</div>
+      <div class="pub-body">
+        <h3>混成式學習應用在程式語言教學之研究</h3>
+        <div class="pub-citation"><strong>姜育昇</strong> 等 (2022).《物理教育學刊》23(1), 1–12.</div>
+        <div class="pub-note" data-en="Contribution — Data analysis" data-zh="貢獻 — 數據分析">Contribution — Data analysis</div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-type conf">Conference</div>
+      <div class="pub-body">
+        <h3>營收資料預測輔助股票投資決策之研究</h3>
+        <div class="pub-citation">劉大維、李俊宏、<strong>姜育昇</strong> (2023). 第21屆離島資訊研討會.</div>
+        <div class="pub-note" data-en="Contribution — Partial implementation" data-zh="貢獻 — 部分程式邏輯">Contribution — Partial implementation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr/></div>
+
+<!-- EDUCATION -->
+<section class="section" id="education">
+  <div class="fade-in">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-heading" data-en="Education" data-zh="學歷">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-row">
+      <div class="edu-card">
+        <h3 data-en="M.S. Computer Science" data-zh="資訊工程碩士">M.S. Computer Science</h3>
+        <div class="edu-school" data-en="Feng Chia University 逢甲大學" data-zh="逢甲大學">Feng Chia University 逢甲大學</div>
+        <div class="edu-year">2021 — 2023</div>
+        <p data-en="Thesis: Knowledge-Based Financial Time Series — Indicator Knowledge Features &amp; Multi-output Prediction" data-zh="論文：以知識為基礎的財金時間序列研究 — 技術指標知識特徵與多輸出預測">Thesis: Knowledge-Based Financial Time Series — Indicator Knowledge Features &amp; Multi-output Prediction</p>
+      </div>
+      <div class="edu-card">
+        <h3 data-en="B.S. Statistics" data-zh="統計學學士">B.S. Statistics</h3>
+        <div class="edu-school" data-en="Feng Chia University 逢甲大學" data-zh="逢甲大學">Feng Chia University 逢甲大學</div>
+        <div class="edu-year">2017 — 2021</div>
+        <p data-en="Statistical methods, probability theory, data analysis" data-zh="統計方法、機率論、數據分析">Statistical methods, probability theory, data analysis</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr/></div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="fade-in">
+    <h2 class="contact-heading" data-en="Let's work together" data-zh="期待與您合作">Let's work together</h2>
+    <p class="contact-text" data-en="Currently seeking dedicated AI/ML Engineer roles. Open to opportunities building production ML systems and data infrastructure." data-zh="目前正在尋求專職 AI/ML 工程師角色，期望在生產環境中構建 ML 系統與數據基礎建設。">Currently seeking dedicated AI/ML Engineer roles. Open to opportunities building production ML systems and data infrastructure.</p>
+    <div class="contact-row">
+      <a href="mailto:johnson.chiang26@gmail.com" class="btn btn-fill" data-en="johnson.chiang26@gmail.com" data-zh="johnson.chiang26@gmail.com">johnson.chiang26@gmail.com</a>
+    </div>
+    <div class="contact-row" style="margin-top:1.5rem;">
+      <a href="https://github.com/johnsonchiang26-dev" target="_blank" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.kaggle.com/johnsonchiang26" target="_blank" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.281.18.046.149.034.233-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.335"/></svg>
+        Kaggle
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" data-en="Designed &amp; built by Johnson Chiang · 2025" data-zh="姜育昇設計與建置 · 2025">Designed &amp; built by Johnson Chiang · 2025</footer>
+
+<script>
+  // ═══ NAV SCROLL ═══
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+  // ═══ MOBILE MENU ═══
+  document.getElementById('navToggle').addEventListener('click', () =>
+    document.getElementById('navLinks').classList.toggle('open'));
+  document.querySelectorAll('#navLinks a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+  // ═══ SCROLL REVEAL ═══
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(f => io.observe(f));
+
+  // ═══ LANGUAGE TOGGLE ═══
+  let currentLang = 'en';
+
+  function toggleLang() {
+    currentLang = currentLang === 'en' ? 'zh' : 'en';
+    applyLang(currentLang);
+  }
+
+  function applyLang(lang) {
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+    document.body.classList.toggle('zh', lang === 'zh');
+
+    // Update button text
+    document.getElementById('langBtn').textContent = lang === 'en' ? '中文' : 'EN';
+
+    // Swap all [data-en] / [data-zh] content
+    document.querySelectorAll('[data-en][data-zh]').forEach(el => {
+      el.innerHTML = el.getAttribute('data-' + lang);
+    });
+  }
+</script>
+
+</body>
+</html>
