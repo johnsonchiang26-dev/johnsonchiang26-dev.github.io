@@ -176,21 +176,26 @@
     .section-line { flex:1; height:1px; background:var(--border); margin-left:1rem; }
 
     /* ═══ SKILLS ═══ */
-    .skills-row {
-      display:grid; grid-template-columns:repeat(5,1fr);
-      border:1px solid var(--border); border-radius:3px; overflow:hidden;
+    .skills-section { display:flex; flex-direction:column; gap:2rem; }
+    .skills-group {
+      display:grid; grid-template-columns:140px 1fr; gap:1.5rem; align-items:baseline;
+      padding:1.5rem 0; border-bottom:1px solid var(--border-light);
     }
-    .skill-col {
-      padding:1.75rem 1.5rem; border-right:1px solid var(--border);
-      transition:background 0.25s;
+    .skills-group:last-child { border-bottom:none; }
+    .skills-group-label {
+      font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em;
+      text-transform:uppercase; color:var(--terracotta); padding-top:0.15rem;
     }
-    .skill-col:last-child { border-right:none; }
-    .skill-col:hover { background:var(--warm-white); }
-    .skill-col h3 {
-      font-family:var(--mono); font-size:0.65rem; letter-spacing:0.12em;
-      text-transform:uppercase; color:var(--terracotta); margin-bottom:0.85rem;
+    .skills-tags { display:flex; flex-wrap:wrap; gap:0.45rem; }
+    .skill-tag {
+      font-family:var(--mono); font-size:0.72rem; letter-spacing:0.02em;
+      color:var(--ink-light); background:var(--warm-white);
+      border:1px solid var(--border-light); padding:0.3rem 0.7rem;
+      border-radius:3px; transition:all 0.2s; white-space:nowrap;
     }
-    .skill-col p { font-size:0.85rem; line-height:1.65; color:var(--ink-light); }
+    .skill-tag:hover { border-color:var(--terracotta); color:var(--terracotta); background:var(--terracotta-light); }
+    .skill-tag.accent { color:var(--terracotta); border-color:rgba(196,96,60,0.25); background:var(--terracotta-light); font-weight:500; }
+    .skill-tag.infra { color:var(--slate); border-color:rgba(61,90,110,0.2); background:var(--slate-light); }
 
     /* ═══ EXPERIENCE ═══ */
     .exp-entry {
@@ -260,6 +265,39 @@
     }
     .project-stat strong { color:var(--terracotta); font-weight:500; }
 
+    /* ═══ EXPANDABLE PROJECT DETAIL ═══ */
+    .project-expand-btn {
+      font-family:var(--mono); font-size:0.68rem; letter-spacing:0.04em;
+      color:var(--terracotta); background:none; border:none; cursor:pointer;
+      display:inline-flex; align-items:center; gap:0.35rem; padding:0;
+      margin-top:0.75rem; transition:opacity 0.2s;
+    }
+    .project-expand-btn:hover { opacity:0.7; }
+    .project-expand-btn svg { width:12px; height:12px; transition:transform 0.3s; }
+    .project-expand-btn.open svg { transform:rotate(180deg); }
+
+    .project-detail {
+      max-height:0; overflow:hidden; transition:max-height 0.45s ease, opacity 0.35s ease;
+      opacity:0;
+    }
+    .project-detail.open { opacity:1; }
+    .project-detail-inner {
+      padding-top:1.25rem; margin-top:1rem; border-top:1px dashed var(--border);
+    }
+    .detail-points { list-style:none; margin:0; padding:0; }
+    .detail-points li {
+      position:relative; padding-left:1.15rem; margin-bottom:0.55rem;
+      font-size:0.84rem; line-height:1.7; color:var(--ink-light);
+    }
+    .detail-points li::before {
+      content:''; position:absolute; left:0; top:0.65em;
+      width:5px; height:1px; background:var(--terracotta);
+    }
+    .detail-tech {
+      margin-top:0.75rem; font-family:var(--mono); font-size:0.72rem;
+      color:var(--ink-muted); line-height:1.6;
+    }
+
     /* ═══ PUBLICATIONS ═══ */
     .pub {
       padding:1.5rem 0; border-bottom:1px solid var(--border-light);
@@ -317,10 +355,7 @@
 
     /* ═══ RESPONSIVE ═══ */
     @media(max-width:900px) {
-      .skills-row { grid-template-columns:repeat(2,1fr); }
-      .skill-col { border-bottom:1px solid var(--border); }
-      .skill-col:nth-child(2n) { border-right:none; }
-      .skill-col:nth-last-child(-n+2) { border-bottom:none; }
+      .skills-group { grid-template-columns:1fr; gap:0.6rem; }
       .projects-grid { grid-template-columns:1fr; }
       .exp-entry { grid-template-columns:1fr; gap:0.5rem; }
       .pub { grid-template-columns:1fr; gap:0.35rem; }
@@ -340,9 +375,6 @@
       .section { padding:3.5rem 1.5rem; }
       .divider { padding:0 1.5rem; }
       .contact { padding:4rem 1.5rem 3.5rem; }
-      .skills-row { grid-template-columns:1fr; }
-      .skill-col { border-right:none; border-bottom:1px solid var(--border); }
-      .skill-col:last-child { border-bottom:none; }
     }
   </style>
 </head>
@@ -389,26 +421,56 @@
       <h2 class="section-heading" data-en="Expertise" data-zh="核心技能">Expertise</h2>
       <div class="section-line"></div>
     </div>
-    <div class="skills-row">
-      <div class="skill-col">
-        <h3>ML / AI</h3>
-        <p data-en="Time Series (LSTM, RNN, Attention), Feature Engineering, Multi-output Prediction, Fuzzy Logic, LLM Agents with RAG" data-zh="時間序列（LSTM、RNN、Attention）、特徵工程與選取、多輸出迴歸/分類、模糊邏輯、LLM Agent（RAG、多角色編排）">Time Series (LSTM, RNN, Attention), Feature Engineering, Multi-output Prediction, Fuzzy Logic, LLM Agents with RAG</p>
+    <div class="skills-section">
+      <div class="skills-group">
+        <div class="skills-group-label">ML / AI</div>
+        <div class="skills-tags">
+          <span class="skill-tag accent">LSTM</span>
+          <span class="skill-tag accent">Attention</span>
+          <span class="skill-tag accent">LLM Agents</span>
+          <span class="skill-tag accent">RAG</span>
+          <span class="skill-tag">Feature Engineering</span>
+          <span class="skill-tag">Multi-output Prediction</span>
+          <span class="skill-tag">Fuzzy Logic</span>
+          <span class="skill-tag">Time Series</span>
+        </div>
       </div>
-      <div class="skill-col">
-        <h3 data-en="Frameworks" data-zh="框架">Frameworks</h3>
-        <p>PyTorch, TensorFlow, scikit-learn, XGBoost, SVR, SVM, Random Forest, Pandas, NumPy</p>
+      <div class="skills-group">
+        <div class="skills-group-label" data-en="Frameworks" data-zh="框架">Frameworks</div>
+        <div class="skills-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">scikit-learn</span>
+          <span class="skill-tag">XGBoost</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+        </div>
       </div>
-      <div class="skill-col">
-        <h3 data-en="Infrastructure" data-zh="基礎建設">Infrastructure</h3>
-        <p>AWS EC2 / Bedrock / S3, Docker, Airflow, FastAPI, MySQL, PostgreSQL, Linux</p>
+      <div class="skills-group">
+        <div class="skills-group-label" data-en="Infrastructure" data-zh="基礎建設">Infrastructure</div>
+        <div class="skills-tags">
+          <span class="skill-tag infra">AWS EC2</span>
+          <span class="skill-tag infra">Bedrock</span>
+          <span class="skill-tag infra">Docker</span>
+          <span class="skill-tag infra">Airflow</span>
+          <span class="skill-tag infra">FastAPI</span>
+          <span class="skill-tag infra">MySQL</span>
+          <span class="skill-tag infra">PostgreSQL</span>
+          <span class="skill-tag infra">Linux</span>
+        </div>
       </div>
-      <div class="skill-col">
-        <h3 data-en="Languages" data-zh="程式語言">Languages</h3>
-        <p>Python, SQL, R</p>
-      </div>
-      <div class="skill-col">
-        <h3 data-en="Tools" data-zh="工具">Tools</h3>
-        <p>Git, Claude Code, Power BI, Tableau, Matplotlib, R Shiny</p>
+      <div class="skills-group">
+        <div class="skills-group-label" data-en="Languages & Tools" data-zh="語言與工具">Languages & Tools</div>
+        <div class="skills-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Claude Code</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Matplotlib</span>
+        </div>
       </div>
     </div>
   </div>
@@ -488,6 +550,22 @@
         </div>
         <h3 data-en="Knowledge-Driven Financial Time Series Forecasting" data-zh="知識驅動的金融時間序列預測">Knowledge-Driven Financial Time Series Forecasting</h3>
         <p data-en="Quantified technical indicator knowledge — MA crossovers, KD zones, MACD slope — into engineered features. Multi-output models predict next-day OHLC changes. Knowledge features consistently outperformed raw price-volume data." data-zh="將技術指標知識（MA交叉、KD超買超賣區、MACD斜率）量化為特徵，搭配 SVR、XGBoost、LSTM Attention 多輸出模型預測隔日 OHLC 漲跌幅。知識特徵顯著優於原始量價資料。">Quantified technical indicator knowledge — MA crossovers, KD zones, MACD slope — into engineered features. Multi-output models predict next-day OHLC changes. Knowledge features consistently outperformed raw price-volume data.</p>
+        <button class="project-expand-btn" onclick="toggleDetail(this)" data-en="More details" data-zh="展開詳情">
+          More details
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="project-detail" id="thesisDetail">
+          <div class="project-detail-inner">
+            <ul class="detail-points">
+              <li data-en="Developed a multi-output regression model (SVR, XGBoost, LSTM+Attention) to simultaneously predict next-day Open, High, Low, Close price changes — not just direction, but magnitude." data-zh="建構多輸出迴歸模型（SVR、XGBoost、LSTM+Attention），同時預測隔日 Open、High、Low、Close 的漲跌幅度，不僅預測方向，更預測幅度。">Developed a multi-output regression model (SVR, XGBoost, LSTM+Attention) to simultaneously predict next-day Open, High, Low, Close price changes — not just direction, but magnitude.</li>
+              <li data-en="Transformed 158 raw technical indicators into &quot;knowledge features&quot; via arithmetic operations (e.g. MA5 − MA20, KD > 80), allowing models to learn indicator semantics rather than memorizing values." data-zh="將 158 個原始技術指標透過算術運算轉換為「知識特徵」（例如 MA5 − MA20、KD > 80），讓模型學習指標語義而非記憶數值。">Transformed 158 raw technical indicators into "knowledge features" via arithmetic operations (e.g. MA5 − MA20, KD > 80), allowing models to learn indicator semantics rather than memorizing values.</li>
+              <li data-en="Applied forward/backward feature selection to identify optimal subsets from 158 technical indicators, significantly improving prediction accuracy." data-zh="應用前向/後向特徵選取，從 158 個技術指標中篩選最佳子集，顯著提升預測精準度。">Applied forward/backward feature selection to identify optimal subsets from 158 technical indicators, significantly improving prediction accuracy.</li>
+              <li data-en="Integrated fuzzy logic systems to quantify expert linguistic terms (e.g. &quot;high volume breakout&quot;, &quot;golden cross&quot;) into numerical features, bridging domain knowledge with ML models." data-zh="整合模糊邏輯系統，將專家語言（如「爆量突破」「黃金交叉」）量化為數值特徵，橋接領域知識與機器學習模型。">Integrated fuzzy logic systems to quantify expert linguistic terms (e.g. "high volume breakout", "golden cross") into numerical features, bridging domain knowledge with ML models.</li>
+              <li data-en="Published as: Lee, C.H., Lee, T.J., Chiang, Y.S. et al. (2023). &quot;Intelligent System for Stock Investment Decision Making.&quot; JISE, 39(5), 1101–1116. (SCIE indexed)" data-zh="發表為：Lee, C.H., Lee, T.J., Chiang, Y.S. et al. (2023).「Intelligent System for Stock Investment Decision Making」JISE, 39(5), 1101–1116.（SCIE 索引）">Published as: Lee, C.H., Lee, T.J., Chiang, Y.S. et al. (2023). "Intelligent System for Stock Investment Decision Making." JISE, 39(5), 1101–1116. (SCIE indexed)</li>
+            </ul>
+            <div class="detail-tech">Tech — PyTorch · scikit-learn · XGBoost · SVR · LSTM Attention · Pandas · Fuzzy Logic</div>
+          </div>
+        </div>
         <div class="project-footer">
           <div class="project-stack"><span>PyTorch</span><span>scikit-learn</span><span>XGBoost</span><span>LSTM Attention</span></div>
           <div class="project-stat" data-en="Published in <strong>JISE</strong>" data-zh="發表於 <strong>JISE</strong>">Published in <strong>JISE</strong></div>
@@ -535,9 +613,10 @@
           <span class="project-category" data-en="Side Project" data-zh="個人專案">Side Project</span>
         </div>
         <h3 data-en="MBTI × Horoscope AI Fortune Platform" data-zh="MBTI × 星座 AI 運勢平台">MBTI × Horoscope AI Fortune Platform</h3>
-        <p data-en="Full-stack AI app with scheduled crawlers for fortune data, LLM API for personalized advice, and shareable fortune-card image generation. Deployed on AWS EC2." data-zh="FastAPI + PostgreSQL 全端 AI 應用，爬蟲定時採集運勢數據，LLM API 產生個人化建議與分享圖片功能，部署於 AWS EC2。">Full-stack AI app with scheduled crawlers for fortune data, LLM API for personalized advice, and shareable fortune-card image generation. Deployed on AWS EC2.</p>
+        <p data-en="Full-stack AI app combining MBTI personality types with daily horoscope data. Scheduled crawlers collect fortune data, LLM API generates personalized advice for 192 combinations (16 MBTI × 12 zodiac), and users can share dynamic fortune cards with radar chart scores." data-zh="結合 MBTI 人格類型與每日星座運勢的全端 AI 應用。定時爬蟲採集運勢數據，LLM API 為 192 種組合（16 MBTI × 12 星座）生成個人化建議，用戶可分享含雷達圖分數的動態運勢卡片。">Full-stack AI app combining MBTI personality types with daily horoscope data. Scheduled crawlers collect fortune data, LLM API generates personalized advice for 192 combinations (16 MBTI × 12 zodiac), and users can share dynamic fortune cards with radar chart scores.</p>
         <div class="project-footer">
-          <div class="project-stack"><span>FastAPI</span><span>PostgreSQL</span><span>LLM API</span><span>AWS EC2</span></div>
+          <div class="project-stack"><span>FastAPI</span><span>PostgreSQL</span><span>LLM API</span><span>Pillow</span><span>AWS EC2</span></div>
+          <div class="project-stat" data-en="<strong>192</strong> combos" data-zh="<strong>192</strong> 種組合"><strong>192</strong> combos</div>
         </div>
       </div>
 
@@ -550,6 +629,29 @@
         <div class="project-footer">
           <div class="project-stack"><span>scikit-learn</span><span>Feature Eng.</span><span>Time Series</span></div>
           <div class="project-stat">Precision <strong>.78</strong> · F1 <strong>.70</strong></div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <span class="project-category thesis" data-en="Research · 2022" data-zh="研究專案 · 2022">Research · 2022</span>
+        </div>
+        <h3 data-en="Stock Alert Signal Classification" data-zh="警示股訊號分類預測">Stock Alert Signal Classification</h3>
+        <p data-en="Built a classification model (SVM) to predict abnormal-return stocks using fuzzy K-line patterns combined with fundamental data. Developed automated web scraper to collect and merge alert-stock data with financial fundamentals." data-zh="使用 SVM 分類器基於模糊 K 線型態 + 基本面數據預測異常報酬股票。開發自動化爬蟲進行數據採集與整合。">Built a classification model (SVM) to predict abnormal-return stocks using fuzzy K-line patterns combined with fundamental data. Developed automated web scraper to collect and merge alert-stock data with financial fundamentals.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>SVM</span><span>Fuzzy Logic</span><span>Web Scraping</span><span>Pandas</span></div>
+          <div class="project-stat" data-en="Accuracy <strong>60%</strong>" data-zh="準確率 <strong>60%</strong>">Accuracy <strong>60%</strong></div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <span class="project-category" data-en="Academic" data-zh="學術專案">Academic</span>
+        </div>
+        <h3 data-en="Japan Housing Price Prediction" data-zh="日本房價預測">Japan Housing Price Prediction</h3>
+        <p data-en="Incorporated macroeconomic factors (exchange rate, wage level, unemployment, real estate investment) and compared multiple ML methods to improve price prediction beyond traditional features." data-zh="納入總體經濟因子（匯率、薪資水準、失業率、不動產投資額），比較多種 ML 方法，提升傳統特徵之外的房價預測能力。">Incorporated macroeconomic factors (exchange rate, wage level, unemployment, real estate investment) and compared multiple ML methods to improve price prediction beyond traditional features.</p>
+        <div class="project-footer">
+          <div class="project-stack"><span>Random Forest</span><span>XGBoost</span><span>SVR</span><span>Feature Eng.</span></div>
         </div>
       </div>
 
@@ -685,6 +787,36 @@
     document.querySelectorAll('[data-en][data-zh]').forEach(el => {
       el.innerHTML = el.getAttribute('data-' + lang);
     });
+  }
+  // ═══ EXPAND PROJECT DETAIL ═══
+  function toggleDetail(btn) {
+    const detail = btn.nextElementSibling;
+    const isOpen = detail.classList.contains('open');
+    btn.classList.toggle('open', !isOpen);
+    if (!isOpen) {
+      detail.style.maxHeight = detail.scrollHeight + 'px';
+      detail.classList.add('open');
+    } else {
+      detail.style.maxHeight = '0';
+      detail.classList.remove('open');
+    }
+    // Update button text based on language
+    const lang = currentLang;
+    btn.textContent = '';
+    const txt = document.createTextNode(!isOpen 
+      ? (lang === 'zh' ? '收起詳情' : 'Less details') 
+      : (lang === 'zh' ? '展開詳情' : 'More details'));
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '2.5');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'M6 9l6 6 6-6');
+    svg.appendChild(path);
+    btn.appendChild(txt);
+    btn.appendChild(svg);
+    btn.classList.toggle('open', !isOpen);
   }
 </script>
 
