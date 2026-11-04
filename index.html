@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Johnson Chiang — Data & AI Engineer</title>
-  <meta name="description" content="Portfolio of Johnson Chiang (姜育昇) — AI/ML Engineer, financial time series, data pipelines, LLM agents." />
+  <meta name="description" content="Portfolio of Johnson Chiang (姜育昇) — Data Engineer, financial time series, data pipelines, LLM applications." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -404,7 +404,7 @@
     <div class="hero-greeting" data-en="DATA & AI ENGINEER" data-zh="Data & AI Engineer">DATA & AI ENGINEER</div>
     <h1 data-en="Proving it <em>with data</em>" data-zh="讓數據<em>說話</em>">Proving it <em>with data</em></h1>
     <div class="hero-sub" data-en="姜育昇 — Taipei, Taiwan" data-zh="姜育昇 — 台北，台灣">姜育昇 — Taipei, Taiwan</div>
-    <p class="hero-bio" data-en="I fell in love with data in college — the idea that you could prove something, settle an argument, or uncover a pattern just by looking at the numbers. To back up my code with real credibility, I went on to earn an M.S. in Computer Science, where my thesis on financial time series forecasting was published in a SCIE journal. Now I build the data infrastructure that makes good decisions possible: ETL pipelines processing 350M+ records, anomaly alerting systems, and LLM-powered analytics tools on AWS — all running in production, every day." data-zh="大學時期愛上了數據 — 喜歡用數據證明一件事、發現一個規律。為了讓我寫的程式和分析更有說服力，我去念了資工碩士，碩論研究金融時間序列預測並發表於 SCIE 期刊。現在我在做的事是建構讓好決策成為可能的數據基礎建設：處理 3.5 億+ 筆資料的 ETL Pipeline、異常預警系統、以及 LLM 驅動的分析工具，全部跑在 AWS 上，每天穩定運行。">I fell in love with data in college — the idea that you could prove something, settle an argument, or uncover a pattern just by looking at the numbers. To back up my code with real credibility, I went on to earn an M.S. in Computer Science, where my thesis on financial time series forecasting was published in a SCIE journal. Now I build the data infrastructure that makes good decisions possible: ETL pipelines processing 350M+ records, anomaly alerting systems, and LLM-powered analytics tools on AWS — all running in production, every day.</p>
+    <p class="hero-bio" data-en="I fell in love with data in college — the idea that you could prove something, settle an argument, or uncover a pattern just by looking at the numbers. To back up my code with real credibility, I went on to earn an M.S. in Computer Science, where my thesis on financial time series forecasting was published in a SCIE journal. Now I build the data infrastructure that makes good decisions possible: Airflow ETL pipelines over 1B+ records and anomaly alerting systems on AWS, running in production every day, plus LLM analytics prototypes." data-zh="大學時期愛上了數據 — 喜歡用數據證明一件事、發現一個規律。為了讓我寫的程式和分析更有說服力，我去念了資工碩士，碩論研究金融時間序列預測並發表於 SCIE 期刊。現在我在做的事是建構讓好決策成為可能的數據基礎建設：處理 10 億+ 筆資料的 Airflow ETL Pipeline 與異常預警系統，每天在 AWS 上穩定運行，另有 LLM 分析工具原型。">I fell in love with data in college — the idea that you could prove something, settle an argument, or uncover a pattern just by looking at the numbers. To back up my code with real credibility, I went on to earn an M.S. in Computer Science, where my thesis on financial time series forecasting was published in a SCIE journal. Now I build the data infrastructure that makes good decisions possible: Airflow ETL pipelines over 1B+ records and anomaly alerting systems on AWS, running in production every day, plus LLM analytics prototypes.</p>
     <div class="hero-actions">
       <a href="#projects" class="btn btn-fill" data-en="View Work" data-zh="查看專案">View Work</a>
     </div>
@@ -489,7 +489,7 @@
 
     <div class="exp-entry">
       <div class="exp-meta">
-        <div class="exp-dates">2025.01 — Present</div>
+        <div class="exp-dates">2025.02 — Present</div>
         <div class="exp-company-name">Hytech (FinTech)</div>
       </div>
       <div class="exp-body">
@@ -498,19 +498,19 @@
         <div class="exp-label" data-en="LLM Applications & Alerting" data-zh="LLM 應用與預警系統">LLM Applications & Alerting</div>
         <ul class="exp-points">
           <li data-en="Designed 4-role AI Agent (Planner → Executor → Analyst → Reporter) on AWS Bedrock for NL querying of SMS analytics. 5+ debug iterations fixing hallucination, brand mapping, and query handling." data-zh="設計 4 角色 AI Agent（Planner→Executor→Analyst→Reporter）於 AWS Bedrock，自然語言查詢 SMS 數據。迭代 5+ 輪修正 hallucination、品牌映射、查詢類型處理。">Designed 4-role AI Agent (Planner → Executor → Analyst → Reporter) on AWS Bedrock for NL querying of SMS analytics. 5+ debug iterations fixing hallucination, brand mapping, and query handling.</li>
-          <li data-en="Built 3-tier anomaly alerting (P75/P90/P95) with daily batch against historical baselines. Incremental mode: 13 min → 28 sec." data-zh="建構 3 層級異常預警系統（P75/P90/P95 閾值），每日批次比對歷史基線。Incremental 模式將執行時間從 13 分鐘降至 28 秒。">Built 3-tier anomaly alerting (P75/P90/P95) with daily batch against historical baselines. Incremental mode: 13 min → 28 sec.</li>
+          <li data-en="Built percentile-based anomaly alerting against 90-day historical baselines per brand × country, with hourly ETL and automated Lark notifications." data-zh="建構以百分位數為基礎的異常預警系統，依品牌 × 國家比對 90 天歷史基線，搭配每小時 ETL 與自動 Lark 通知。">Built percentile-based anomaly alerting against 90-day historical baselines per brand × country, with hourly ETL and automated Lark notifications.</li>
         </ul>
 
         <div class="exp-label" data-en="Data Engineering" data-zh="數據工程">Data Engineering</div>
         <ul class="exp-points">
-          <li data-en="ETL pipelines on AWS EC2 (Airflow + Docker) processing 90M+ SMS and 259M+ email records, automated daily." data-zh="AWS EC2 ETL Pipeline（Airflow + Docker），處理 9,000萬+ SMS 與 2.59億+ Email，每日自動排程。">ETL pipelines on AWS EC2 (Airflow + Docker) processing 90M+ SMS and 259M+ email records, automated daily.</li>
+          <li data-en="ETL pipelines on AWS EC2 (Airflow + Docker) processing 108M+ SMS and 240M+ email records, automated daily." data-zh="AWS EC2 ETL Pipeline（Airflow + Docker），處理 1.08 億+ SMS 與 2.4 億+ Email，每日自動排程。">ETL pipelines on AWS EC2 (Airflow + Docker) processing 108M+ SMS and 240M+ email records, automated daily.</li>
           <li data-en="Partner/IB recursive referral chain pipeline across 14.8M+ user relationships for daily commission reconciliation." data-zh="Partner/IB 遞迴返傭鏈路分析，每日 1,480萬+ 筆用戶關係，支撐佣金對帳。">Partner/IB recursive referral chain pipeline across 14.8M+ user relationships for daily commission reconciliation.</li>
           <li data-en="SMS volume abuse alerting: IP-vs-phone geolocation on 1.1M requests, 94% country mismatch, identified credential-stuffing patterns." data-zh="SMS 刷量預警：IP 與手機國家比對 110 萬筆請求，94% 國家不一致率，識別 credential-stuffing 刷量模式。">SMS volume abuse alerting: IP-vs-phone geolocation on 1.1M requests, 94% country mismatch, identified credential-stuffing patterns.</li>
         </ul>
 
         <div class="exp-label" data-en="Project Management" data-zh="專案管理">Project Management</div>
         <ul class="exp-points">
-          <li data-en="Owned 3 product modules, interfacing with multiple PMs and RD teams — independently clarifying requirements, proposing data solutions, managing timelines." data-zh="負責 3 個產品模組，對接多位 PM 及 RD 團隊，獨立釐清需求、提供數據解決方案、管控時程與任務拆分。">Owned 3 product modules, interfacing with multiple PMs and RD teams — independently clarifying requirements, proposing data solutions, managing timelines.</li>
+          <li data-en="Owned 4 product modules, interfacing with multiple PMs and RD teams — independently clarifying requirements, proposing data solutions, managing timelines." data-zh="負責 4 個產品模組，對接多位 PM 及 RD 團隊，獨立釐清需求、提供數據解決方案、管控時程與任務拆分。">Owned 4 product modules, interfacing with multiple PMs and RD teams — independently clarifying requirements, proposing data solutions, managing timelines.</li>
         </ul>
       </div>
     </div>
@@ -524,7 +524,7 @@
         <h3 data-en="RPA &amp; DBA Developer" data-zh="RPA 與 DBA 開發工程師">RPA &amp; DBA Developer</h3>
         <ul class="exp-points">
           <li data-en="Multiple RPA projects (Automation Anywhere), ~30hr/project/month saved." data-zh="多個 RPA 專案（Automation Anywhere），每專案月省 30 小時。">Multiple RPA projects (Automation Anywhere), ~30hr/project/month saved.</li>
-          <li data-en="MSSQL + SQL Server Audit; two-factory consolidation, zero downtime." data-zh="MSSQL + SQL Server Audit；兩廠併廠零停機。">MSSQL + SQL Server Audit; two-factory consolidation, zero downtime.</li>
+          <li data-en="MSSQL + SQL Server Audit; two-factory consolidation, stable operation after cutover." data-zh="MSSQL + SQL Server Audit；兩廠併廠，切換後穩定運作。">MSSQL + SQL Server Audit; two-factory consolidation, stable operation after cutover.</li>
         </ul>
       </div>
     </div>
@@ -561,7 +561,7 @@
               <li data-en="Transformed 158 raw technical indicators into &quot;knowledge features&quot; via arithmetic operations (e.g. MA5 − MA20, KD > 80), allowing models to learn indicator semantics rather than memorizing values." data-zh="將 158 個原始技術指標透過算術運算轉換為「知識特徵」（例如 MA5 − MA20、KD > 80），讓模型學習指標語義而非記憶數值。">Transformed 158 raw technical indicators into "knowledge features" via arithmetic operations (e.g. MA5 − MA20, KD > 80), allowing models to learn indicator semantics rather than memorizing values.</li>
               <li data-en="Applied forward/backward feature selection to identify optimal subsets from 158 technical indicators, significantly improving prediction accuracy." data-zh="應用前向/後向特徵選取，從 158 個技術指標中篩選最佳子集，顯著提升預測精準度。">Applied forward/backward feature selection to identify optimal subsets from 158 technical indicators, significantly improving prediction accuracy.</li>
               <li data-en="Integrated fuzzy logic systems to quantify expert linguistic terms (e.g. &quot;high volume breakout&quot;, &quot;golden cross&quot;) into numerical features, bridging domain knowledge with ML models." data-zh="整合模糊邏輯系統，將專家語言（如「爆量突破」「黃金交叉」）量化為數值特徵，橋接領域知識與機器學習模型。">Integrated fuzzy logic systems to quantify expert linguistic terms (e.g. "high volume breakout", "golden cross") into numerical features, bridging domain knowledge with ML models.</li>
-              <li data-en="Published as: Lee, C.H., Lee, T.J., Chiang, Y.S. et al. (2023). &quot;Intelligent System for Stock Investment Decision Making.&quot; JISE, 39(5), 1101–1116. (SCIE indexed)" data-zh="發表為：Lee, C.H., Lee, T.J., Chiang, Y.S. et al. (2023).「Intelligent System for Stock Investment Decision Making」JISE, 39(5), 1101–1116.（SCIE 索引）">Published as: Lee, C.H., Lee, T.J., Chiang, Y.S. et al. (2023). "Intelligent System for Stock Investment Decision Making." JISE, 39(5), 1101–1116. (SCIE indexed)</li>
+              <li data-en="Published as: Lee, C.H., Lee, T.J., Chiang, Y.S., Yuan, S.Y., &amp; Liou, J.H. (2023). &quot;Design and Implement an Intelligent System for Stock Investment Decision Making.&quot; JISE, 39(5), 1101–1116. (SCIE indexed)" data-zh="發表為：Lee, C.H., Lee, T.J., Chiang, Y.S., Yuan, S.Y., &amp; Liou, J.H. (2023).「Design and Implement an Intelligent System for Stock Investment Decision Making」JISE, 39(5), 1101–1116.（SCIE 索引）">Published as: Lee, C.H., Lee, T.J., Chiang, Y.S., Yuan, S.Y., &amp; Liou, J.H. (2023). "Design and Implement an Intelligent System for Stock Investment Decision Making." JISE, 39(5), 1101–1116. (SCIE indexed)</li>
             </ul>
             <div class="detail-tech">Tech — PyTorch · scikit-learn · XGBoost · SVR · LSTM Attention · Pandas · Fuzzy Logic</div>
           </div>
@@ -577,7 +577,7 @@
           <span class="project-category work" data-en="Production · Hytech" data-zh="生產環境 · 海科科技">Production · Hytech</span>
         </div>
         <h3 data-en="SMS &amp; Email Anomaly Alerting Pipeline" data-zh="SMS 與 Email 異常預警系統">SMS &amp; Email Anomaly Alerting Pipeline</h3>
-        <p data-en="End-to-end alerting system on AWS processing 90M+ SMS and 259M+ email records. 3-tier classification with historical baselines, incremental mode, and automated Lark notifications across 7 brands globally." data-zh="AWS 端到端預警系統，處理 9,000萬+ SMS 與 2.59億+ Email。3 層級分類搭配歷史基線、增量模式與自動 Lark 通知，覆蓋 7 個品牌全球市場。">End-to-end alerting system on AWS processing 90M+ SMS and 259M+ email records. 3-tier classification with historical baselines, incremental mode, and automated Lark notifications across 7 brands globally.</p>
+        <p data-en="End-to-end alerting system on AWS processing 108M+ SMS and 240M+ email records. Percentile-based classification against historical baselines, hourly ETL, and automated Lark notifications across 7 brands globally." data-zh="AWS 端到端預警系統，處理 1.08 億+ SMS 與 2.4 億+ Email。以百分位數為基礎的分級搭配歷史基線、每小時 ETL 與自動 Lark 通知，覆蓋 7 個品牌全球市場。">End-to-end alerting system on AWS processing 108M+ SMS and 240M+ email records. Percentile-based classification against historical baselines, hourly ETL, and automated Lark notifications across 7 brands globally.</p>
         <button class="project-expand-btn" onclick="toggleDetail(this)" data-en="More details" data-zh="展開詳情">
           More details
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
@@ -585,8 +585,8 @@
         <div class="project-detail">
           <div class="project-detail-inner">
             <ul class="detail-points">
-              <li data-en="Designed a 3-tier alert classification (P75 / P90 / P95) using rolling 4-week historical baselines per brand × country × scenario, replacing manual thresholds with data-driven percentile rules." data-zh="設計 3 層級告警分類（P75 / P90 / P95），基於品牌 × 國家 × 場景的 4 週滾動歷史基線，用數據驅動的百分位規則取代人工閾值。">Designed a 3-tier alert classification (P75 / P90 / P95) using rolling 4-week historical baselines per brand × country × scenario, replacing manual thresholds with data-driven percentile rules.</li>
-              <li data-en="Built incremental processing mode (--incremental --days 8) that reduced daily runtime from 13 minutes to 28 seconds by scanning only recent data instead of full-table recalculation." data-zh="建構增量處理模式（--incremental --days 8），僅掃描近期數據取代全表重算，將每日執行時間從 13 分鐘降至 28 秒。">Built incremental processing mode (--incremental --days 8) that reduced daily runtime from 13 minutes to 28 seconds by scanning only recent data instead of full-table recalculation.</li>
+              <li data-en="Designed percentile-based alert thresholds (P5 / P10 / P90 / P95) against 90-day historical baselines per brand × country, grouped by volume and success rate, replacing fixed manual thresholds with data-driven rules." data-zh="設計以百分位數為門檻的告警（P5 / P10 / P90 / P95），依品牌 × 國家比對 90 天歷史基線，並以量級與成功率分群，用數據驅動的規則取代人工固定閾值。">Designed percentile-based alert thresholds (P5 / P10 / P90 / P95) against 90-day historical baselines per brand × country, grouped by volume and success rate, replacing fixed manual thresholds with data-driven rules.</li>
+              <li data-en="Unified SMS, WhatsApp, Voice and Social send / delivery / verification / cost data into one hourly Airflow ETL; backfilled the SMS channel 554 days with zero daily mismatches against source tables." data-zh="把 SMS、WhatsApp、Voice、Social 四個渠道的發送、送達、驗證、成本數據統一成一套每小時 Airflow ETL；SMS 渠道回補 554 天，逐日對源表 0 不一致。">Unified SMS, WhatsApp, Voice and Social send / delivery / verification / cost data into one hourly Airflow ETL; backfilled the SMS channel 554 days with zero daily mismatches against source tables.</li>
               <li data-en="Backfilled 92.6M + 31.2M detail rows for country_name and ip_country_name columns; discovered and fixed a scenario category leakage bug that was excluding ~40% of SMS records from the pipeline." data-zh="回填 9,260 萬 + 3,120 萬筆 detail 資料的 country_name 與 ip_country_name 欄位；發現並修復場景分類遺漏 bug，該問題曾導致約 40% 的 SMS 記錄被排除在管線之外。">Backfilled 92.6M + 31.2M detail rows for country_name and ip_country_name columns; discovered and fixed a scenario category leakage bug that was excluding ~40% of SMS records from the pipeline.</li>
               <li data-en="Investigated SMS fraud patterns — analyzed 1.1M verification requests, found 94% country mismatches, identified SMS Pumping attacks with Pakistan as the primary IP source." data-zh="調查 SMS 詐欺模式 — 分析 110 萬筆驗證請求，發現 94% 國家不匹配，識別 SMS Pumping 攻擊，巴基斯坦為主要攻擊 IP 來源。">Investigated SMS fraud patterns — analyzed 1.1M verification requests, found 94% country mismatches, identified SMS Pumping attacks with Pakistan as the primary IP source.</li>
               <li data-en="Orchestrated via Airflow DAGs in Docker on AWS EC2. Alert results feed into Power BI dashboards for operations team monitoring across 7 brands and 16 SMS channels." data-zh="透過 AWS EC2 上的 Docker Airflow DAG 編排。告警結果匯入 Power BI 儀表板，供營運團隊監控 7 個品牌和 16 個 SMS 渠道。">Orchestrated via Airflow DAGs in Docker on AWS EC2. Alert results feed into Power BI dashboards for operations team monitoring across 7 brands and 16 SMS channels.</li>
@@ -596,7 +596,7 @@
         </div>
         <div class="project-footer">
           <div class="project-stack"><span>Airflow</span><span>Docker</span><span>MySQL</span><span>Power BI</span></div>
-          <div class="project-stat" data-en="Runtime <strong>13m → 28s</strong>" data-zh="執行時間 <strong>13分 → 28秒</strong>">Runtime <strong>13m → 28s</strong></div>
+          <div class="project-stat" data-en="Detail table <strong>108M+</strong> rows" data-zh="明細表 <strong>1.08 億+</strong> 行">Detail table <strong>108M+</strong> rows</div>
         </div>
       </div>
 
@@ -717,8 +717,8 @@
     <div class="pub">
       <div class="pub-type scie">SCIE</div>
       <div class="pub-body">
-        <h3>Intelligent System for Stock Investment Decision Making</h3>
-        <div class="pub-citation">Lee, C.H., Lee, T.J., <strong>Chiang, Y.S.</strong> et al. (2023). <em>JISE</em>, 39(5), 1101–1116.</div>
+        <h3>Design and Implement an Intelligent System for Stock Investment Decision Making</h3>
+        <div class="pub-citation">Lee, C.H., Lee, T.J., <strong>Chiang, Y.S.</strong>, Yuan, S.Y., &amp; Liou, J.H. (2023). <em>Journal of Information Science and Engineering</em>, 39(5), 1101–1116.</div>
         <div class="pub-note" data-en="Contribution — Partial implementation" data-zh="貢獻 — 部分程式邏輯">Contribution — Partial implementation</div>
       </div>
     </div>
@@ -736,7 +736,7 @@
       <div class="pub-type conf">Conference</div>
       <div class="pub-body">
         <h3>營收資料預測輔助股票投資決策之研究</h3>
-        <div class="pub-citation">劉大維、李俊宏、<strong>姜育昇</strong> (2023). 第21屆離島資訊研討會.</div>
+        <div class="pub-citation">劉大維、李俊宏、<strong>姜育昇</strong> (2023). 第21屆離島資訊技術與應用研討會.</div>
         <div class="pub-note" data-en="Contribution — Partial implementation" data-zh="貢獻 — 部分程式邏輯">Contribution — Partial implementation</div>
       </div>
     </div>
@@ -776,7 +776,7 @@
 <section class="contact" id="contact">
   <div class="fade-in">
     <h2 class="contact-heading" data-en="Let's work together" data-zh="期待與您合作">Let's work together</h2>
-    <p class="contact-text" data-en="Currently seeking dedicated AI/ML Engineer roles. Open to opportunities building production ML systems and data infrastructure." data-zh="目前正在尋求專職 AI/ML 工程師角色，期望在生產環境中構建 ML 系統與數據基礎建設。">Currently seeking dedicated AI/ML Engineer roles. Open to opportunities building production ML systems and data infrastructure.</p>
+    <p class="contact-text" data-en="Currently seeking Data Engineer / ML Engineer roles. Open to opportunities building data infrastructure and production ML systems." data-zh="目前正在尋求資料工程師或 ML 工程師職位，期望構建數據基礎建設與生產環境的 ML 系統。">Currently seeking Data Engineer / ML Engineer roles. Open to opportunities building data infrastructure and production ML systems.</p>
     <div class="contact-row">
       <a href="mailto:johnson.chiang26@gmail.com" class="btn btn-fill" data-en="johnson.chiang26@gmail.com" data-zh="johnson.chiang26@gmail.com">johnson.chiang26@gmail.com</a>
     </div>
@@ -847,8 +847,8 @@
     // Update button text based on language
     const lang = currentLang;
     btn.textContent = '';
-    const txt = document.createTextNode(!isOpen 
-      ? (lang === 'zh' ? '收起詳情' : 'Less details') 
+    const txt = document.createTextNode(!isOpen
+      ? (lang === 'zh' ? '收起詳情' : 'Less details')
       : (lang === 'zh' ? '展開詳情' : 'More details'));
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('viewBox', '0 0 24 24');
