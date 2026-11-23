@@ -1,395 +1,152 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light dark">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>姜育昇 Johnson Chiang|資料分析師</title>
-  <meta name="description" content="姜育昇的個人網頁:資料分析師,工作以資料管線為主;公開專案、論文與著作、聯絡方式">
-
-  <style>
-    @layer tokens, base, layout, components;
-
-    @layer tokens {
-      :root {
-        color-scheme: light dark;
-
-        --surface: #fcfcfb;
-        --surface-raised: #ffffff;
-        --text-1: #0b0b0b;
-        --text-2: #52514e;
-        --line: #dedcd6;
-        --link: #1b5fb4;
-        --series-1: #2a78d6;
-        --series-2: #eb6834;
-
-        --font-body: system-ui, -apple-system, "Segoe UI", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-        --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
-
-        --space-1: 0.25rem;
-        --space-2: 0.5rem;
-        --space-3: 0.75rem;
-        --space-4: 1rem;
-        --space-5: 1.5rem;
-        --space-6: 2.5rem;
-        --radius: 0.75rem;
-        --page-max: 54rem;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --surface: #1a1a19;
-          --surface-raised: #222221;
-          --text-1: #f0efec;
-          --text-2: #c3c2b7;
-          --line: #3a3a37;
-          --link: #8dbcf5;
-          --series-1: #3987e5;
-          --series-2: #d95926;
-        }
-      }
-    }
-
-    @layer base {
-      body {
-        margin: 0;
-        background: var(--surface);
-        color: var(--text-1);
-        font-family: var(--font-body);
-        font-size: 1rem;
-        line-height: 1.7;
-        overflow-wrap: break-word;
-      }
-
-      h1, h2, h3, p, dl, dd, ul, ol, figure { margin: 0; }
-      ul, ol { padding: 0; list-style: none; }
-
-      h1, h2, h3 { line-height: 1.3; text-wrap: balance; }
-      h1 { font-size: clamp(1.75rem, 1.4rem + 1.8vw, 2.5rem); }
-      h2 { font-size: 1.25rem; }
-      h3 { font-size: 1.125rem; }
-
-      a {
-        color: var(--link);
-        text-underline-offset: 0.2em;
-      }
-      a:focus-visible {
-        outline: 2px solid var(--link);
-        outline-offset: 2px;
-        border-radius: 2px;
-      }
-
-      code { font-family: var(--font-mono); font-size: 0.9em; }
-    }
-
-    @layer layout {
-      header, main, footer {
-        box-sizing: border-box;
-        max-inline-size: var(--page-max);
-        margin-inline: auto;
-        padding-inline: var(--space-4);
-      }
-      header { padding-block: var(--space-6) var(--space-5); }
-      main > section { padding-block: var(--space-5); border-block-start: 1px solid var(--line); }
-      main > section > h2 { margin-block-end: var(--space-4); }
-      footer { padding-block: var(--space-5) var(--space-6); color: var(--text-2); font-size: 0.875rem; }
-    }
-
-    @layer components {
-      .name-latin { color: var(--text-2); font-weight: 400; font-size: 0.6em; margin-inline-start: var(--space-2); }
-
-      .intro { margin-block-start: var(--space-4); display: grid; gap: var(--space-1); }
-
-      .jump { margin-block-start: var(--space-4); display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
-      .jump a { display: inline-block; padding-block: var(--space-2); }
-
-      .project {
-        container-type: inline-size;
-        background: var(--surface-raised);
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        padding: var(--space-5) var(--space-4);
-      }
-      .project + .project { margin-block-start: var(--space-5); }
-      .project .repo { color: var(--text-2); font-family: var(--font-mono); font-size: 0.875rem; }
-
-      .facts { margin-block-start: var(--space-4); display: grid; gap: var(--space-3); }
-      .facts dt { color: var(--text-2); font-size: 0.875rem; }
-
-      .stats {
-        margin-block-start: var(--space-5);
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
-        gap: var(--space-3);
-      }
-      .stats li { border-inline-start: 3px solid var(--series-1); padding-inline-start: var(--space-3); }
-      .stats strong { display: block; font-size: 1.5rem; line-height: 1.2; font-variant-numeric: tabular-nums; }
-      .stats span { color: var(--text-2); font-size: 0.875rem; }
-
-      .charts { margin-block-start: var(--space-5); display: grid; gap: var(--space-5); }
-      @container (min-width: 40rem) {
-        .charts { grid-template-columns: 1fr 1fr; }
-      }
-      figure svg { display: block; inline-size: 100%; block-size: auto; max-inline-size: 26rem; }
-      figcaption { font-size: 0.9375rem; font-weight: 600; margin-block-end: var(--space-2); }
-      .fig-note { color: var(--text-2); font-size: 0.875rem; margin-block-start: var(--space-2); }
-
-      .legend { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin-block-end: var(--space-2); font-size: 0.875rem; color: var(--text-2); }
-      .legend li { display: flex; align-items: center; gap: var(--space-2); }
-      .legend i { inline-size: 0.75rem; block-size: 0.75rem; border-radius: 2px; }
-      .s1 { background: var(--series-1); fill: var(--series-1); }
-      .s2 { background: var(--series-2); fill: var(--series-2); }
-
-      svg text { font-family: var(--font-body); font-size: 13px; }
-      svg .lbl { fill: var(--text-2); }
-      svg .val { fill: var(--text-1); font-variant-numeric: tabular-nums; }
-      svg .axis { stroke: var(--line); stroke-width: 1; }
-
-      .links { margin-block-start: var(--space-5); display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
-      .links a { display: inline-block; padding-block: var(--space-2); }
-
-      .pubs { display: grid; gap: var(--space-4); }
-      .pubs .kind { color: var(--text-2); font-size: 0.875rem; }
-      .pubs .where { color: var(--text-2); }
-
-      .contact { display: grid; gap: var(--space-2); }
-      .contact a { display: inline-block; padding-block: var(--space-2); }
-    }
-  </style>
+  <meta name="description" content="姜育昇的個人網頁:資料分析師,工作以資料管線為主;公開專案、論文與著作、聯絡方式" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<header>
-  <h1>姜育昇<span class="name-latin" lang="en">Johnson Chiang</span></h1>
-  <div class="intro">
-    <p>在線上交易平台公司當資料分析師,工作以資料管線為主(Airflow、MySQL、Doris、Power BI)</p>
-    <p>之前在研華做 MSSQL 資料庫管理和 RPA 自動化</p>
-    <p>逢甲大學統計系學士、資訊工程碩士</p>
+<a class="skip" href="#main">跳到主要內容</a>
+
+<nav class="nav" aria-label="主導覽">
+  <div class="nav-inner">
+    <a class="nav-name" href="index.html" lang="en">Johnson Chiang</a>
+    <ul class="nav-links">
+      <li><a href="index.html" aria-current="page">首頁</a></li>
+      <li><a href="index.html#projects">專案</a></li>
+      <li><a href="publications.html">論文</a></li>
+      <li><a href="#contact">聯絡</a></li>
+    </ul>
   </div>
-  <nav class="jump" aria-label="頁內導覽">
-    <a href="#projects">公開專案</a>
-    <a href="#publications">論文與著作</a>
-    <a href="#contact">聯絡方式</a>
-  </nav>
+</nav>
+
+<main id="main">
+
+<header class="hero wrap">
+  <div class="hero-content">
+    <div class="eyebrow" lang="en">Data Analyst</div>
+    <h1>姜育昇</h1>
+    <div class="hero-sub" lang="en">Johnson Chiang</div>
+    <div class="hero-bio">
+      <p>在線上交易平台公司當資料分析師,工作以資料管線為主(Airflow、MySQL、Doris、Power BI)</p>
+      <p>之前在研華做 MSSQL 資料庫管理和 RPA 自動化</p>
+      <p>逢甲大學統計系學士、資訊工程碩士</p>
+    </div>
+    <div class="actions">
+      <a href="#projects" class="btn btn-fill">查看專案 <span class="arr" aria-hidden="true">↓</span></a>
+      <a href="publications.html" class="btn btn-outline">論文與著作 <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </div>
 </header>
 
-<main>
+<div class="wrap"><hr class="rule" /></div>
 
-  <section id="projects" aria-labelledby="projects-h">
-    <h2 id="projects-h">公開專案</h2>
+<section class="section wrap" id="projects" aria-labelledby="projects-h">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-heading" id="projects-h">公開專案</h2>
+    <div class="section-line"></div>
+  </div>
 
-    <article class="project" aria-labelledby="p-url">
-      <h3 id="p-url"><a href="https://github.com/johnsonchiang26-dev/malicious-url-detector">惡意網址分類</a></h3>
-      <p class="repo" lang="en">malicious-url-detector</p>
+  <div class="cards">
 
-      <dl class="facts">
-        <div>
-          <dt>這是什麼</dt>
-          <dd>只看網址字串,把網址分成正常、釣魚、惡意程式、網頁置換四類的分類模型</dd>
-        </div>
-        <div>
-          <dt>怎麼做</dt>
-          <dd>先把網址解碼、拆成網域和路徑等欄位,再用詞與字元 n-gram 的 TF-IDF 加 21 個數值特徵訓練 LinearSVC</dd>
-        </div>
-        <div>
-          <dt>實測結果</dt>
-          <dd>65 萬筆公開網址以隨機 80/20 分層切分,13 萬筆測試集的準確率 0.950、macro-F1 0.943;另取 8,000 筆平衡樣本對照 URLBERT,準確率 0.943 對 0.974</dd>
-        </div>
-      </dl>
-
-      <ul class="stats">
-        <li><strong>651,191</strong><span>筆網址</span></li>
-        <li><strong>130,239</strong><span>筆測試集</span></li>
+    <article class="card">
+      <span class="chip" lang="en">malicious-url-detector</span>
+      <h3><a href="malicious-url-detector.html">惡意網址分類</a></h3>
+      <p>只看網址字串,把網址分成正常、釣魚、惡意程式、網頁置換四類的分類模型</p>
+      <ul class="mini-stats">
         <li><strong>0.950</strong><span>準確率</span></li>
         <li><strong>0.943</strong><span>macro-F1</span></li>
+        <li><strong>130,239</strong><span>筆測試集</span></li>
       </ul>
-
-      <div class="charts">
-        <figure>
-          <figcaption>各類別的 F1(13 萬筆測試集)</figcaption>
-          <svg viewBox="0 0 360 140" role="img" aria-label="各類別 F1:網頁置換 0.997、惡意程式 0.977、正常 0.963、釣魚 0.835">
-            <line class="axis" x1="88" y1="4" x2="88" y2="136"/>
-            <text class="lbl" x="80" y="23" text-anchor="end">網頁置換</text>
-            <rect class="s1" x="88" y="9" width="199.4" height="20" rx="4"><title>網頁置換 F1 0.997</title></rect>
-            <text class="val" x="293" y="23">0.997</text>
-            <text class="lbl" x="80" y="57" text-anchor="end">惡意程式</text>
-            <rect class="s1" x="88" y="43" width="195.4" height="20" rx="4"><title>惡意程式 F1 0.977</title></rect>
-            <text class="val" x="289" y="57">0.977</text>
-            <text class="lbl" x="80" y="91" text-anchor="end">正常</text>
-            <rect class="s1" x="88" y="77" width="192.6" height="20" rx="4"><title>正常 F1 0.963</title></rect>
-            <text class="val" x="286" y="91">0.963</text>
-            <text class="lbl" x="80" y="125" text-anchor="end">釣魚</text>
-            <rect class="s1" x="88" y="111" width="167" height="20" rx="4"><title>釣魚 F1 0.835</title></rect>
-            <text class="val" x="261" y="125">0.835</text>
-          </svg>
-          <p class="fig-note">釣魚類分數最低,錯誤多半是和正常網址互相混淆</p>
-        </figure>
-
-        <figure>
-          <figcaption>和 URLBERT 對照(同一批 8,000 筆)</figcaption>
-          <ul class="legend">
-            <li><i class="s1"></i>這個模型</li>
-            <li><i class="s2"></i>URLBERT</li>
-          </ul>
-          <svg viewBox="0 0 360 140" role="img" aria-label="這個模型對 URLBERT:準確率 0.943 對 0.974,macro-F1 0.943 對 0.974,釣魚類 F1 0.889 對 0.951">
-            <line class="axis" x1="88" y1="4" x2="88" y2="136"/>
-            <text class="lbl" x="80" y="26" text-anchor="end">準確率</text>
-            <rect class="s1" x="88" y="6" width="188.6" height="14" rx="3"><title>這個模型 準確率 0.943</title></rect>
-            <text class="val" x="282" y="18">0.943</text>
-            <rect class="s2" x="88" y="22" width="194.8" height="14" rx="3"><title>URLBERT 準確率 0.974</title></rect>
-            <text class="val" x="288" y="34">0.974</text>
-            <text class="lbl" x="80" y="74" text-anchor="end">macro-F1</text>
-            <rect class="s1" x="88" y="54" width="188.6" height="14" rx="3"><title>這個模型 macro-F1 0.943</title></rect>
-            <text class="val" x="282" y="66">0.943</text>
-            <rect class="s2" x="88" y="70" width="194.8" height="14" rx="3"><title>URLBERT macro-F1 0.974</title></rect>
-            <text class="val" x="288" y="82">0.974</text>
-            <text class="lbl" x="80" y="122" text-anchor="end">釣魚類 F1</text>
-            <rect class="s1" x="88" y="102" width="177.8" height="14" rx="3"><title>這個模型 釣魚類 F1 0.889</title></rect>
-            <text class="val" x="271" y="114">0.889</text>
-            <rect class="s2" x="88" y="118" width="190.2" height="14" rx="3"><title>URLBERT 釣魚類 F1 0.951</title></rect>
-            <text class="val" x="284" y="130">0.951</text>
-          </svg>
-          <p class="fig-note">URLBERT 的訓練資料我沒有查證,它可能看過這批網址</p>
-        </figure>
+      <div class="card-footer">
+        <div class="stack"><span>TF-IDF</span><span>LinearSVC</span></div>
+        <div class="card-go">做法與實測結果 <span class="arr" aria-hidden="true">→</span></div>
       </div>
-
-      <p class="links">
-        <a href="https://github.com/johnsonchiang26-dev/malicious-url-detector">原始碼</a>
-        <a href="https://github.com/johnsonchiang26-dev/malicious-url-detector/blob/main/tagging.ipynb">Notebook(含執行輸出)</a>
-        <a href="https://github.com/johnsonchiang26-dev/malicious-url-detector/blob/main/docs/model_card.md">Model card</a>
-      </p>
     </article>
 
-    <article class="project" aria-labelledby="p-sms">
-      <h3 id="p-sms"><a href="https://github.com/johnsonchiang26-dev/sms-spam-detector">垃圾簡訊分類</a></h3>
-      <p class="repo" lang="en">sms-spam-detector</p>
-
-      <dl class="facts">
-        <div>
-          <dt>這是什麼</dt>
-          <dd>把英文簡訊分成正常和垃圾(含釣魚)兩類的分類模型</dd>
-        </div>
-        <div>
-          <dt>怎麼做</dt>
-          <dd>用 PyTorch 自己寫訓練迴圈微調 bert-base-uncased,資料是 UCI 公開的 5,574 則簡訊加 15 則手寫範例,另外訓練 TF-IDF 加邏輯迴歸當對照</dd>
-        </div>
-        <div>
-          <dt>實測結果</dt>
-          <dd>測試集 1,118 則,準確率 0.993、precision 0.986、recall 0.960、F1 0.973;測試集沒有去重,約一成和訓練集的文字相同</dd>
-        </div>
-      </dl>
-
-      <ul class="stats">
-        <li><strong>1,118</strong><span>則測試集</span></li>
+    <article class="card">
+      <span class="chip" lang="en">sms-spam-detector</span>
+      <h3><a href="sms-spam-detector.html">垃圾簡訊分類</a></h3>
+      <p>把英文簡訊分成正常和垃圾(含釣魚)兩類的分類模型</p>
+      <ul class="mini-stats">
         <li><strong>0.993</strong><span>準確率</span></li>
-        <li><strong>0.986</strong><span>precision</span></li>
-        <li><strong>0.960</strong><span>recall</span></li>
         <li><strong>0.973</strong><span>F1</span></li>
+        <li><strong>1,118</strong><span>則測試集</span></li>
       </ul>
-
-      <div class="charts">
-        <figure>
-          <figcaption>判錯的則數(測試集 1,118 則,其中垃圾簡訊 151 則)</figcaption>
-          <ul class="legend">
-            <li><i class="s1"></i>BERT</li>
-            <li><i class="s2"></i>TF-IDF 加邏輯迴歸</li>
-          </ul>
-          <svg viewBox="0 0 360 100" role="img" aria-label="判錯則數:漏掉的垃圾簡訊 BERT 6 則、對照模型 7 則;誤判的正常簡訊 BERT 2 則、對照模型 7 則">
-            <line class="axis" x1="124" y1="4" x2="124" y2="96"/>
-            <text class="lbl" x="116" y="26" text-anchor="end">漏掉的垃圾簡訊</text>
-            <rect class="s1" x="124" y="6" width="150" height="14" rx="3"><title>BERT 漏掉 6 則</title></rect>
-            <text class="val" x="280" y="18">6</text>
-            <rect class="s2" x="124" y="22" width="175" height="14" rx="3"><title>對照模型 漏掉 7 則</title></rect>
-            <text class="val" x="305" y="34">7</text>
-            <text class="lbl" x="116" y="78" text-anchor="end">誤判的正常簡訊</text>
-            <rect class="s1" x="124" y="58" width="50" height="14" rx="3"><title>BERT 誤判 2 則</title></rect>
-            <text class="val" x="180" y="70">2</text>
-            <rect class="s2" x="124" y="74" width="175" height="14" rx="3"><title>對照模型 誤判 7 則</title></rect>
-            <text class="val" x="305" y="86">7</text>
-          </svg>
-          <p class="fig-note">BERT 抓到 151 則垃圾簡訊中的 145 則,對照模型抓到 144 則</p>
-        </figure>
-
-        <figure>
-          <figcaption>四項指標對照</figcaption>
-          <ul class="legend">
-            <li><i class="s1"></i>BERT</li>
-            <li><i class="s2"></i>TF-IDF 加邏輯迴歸</li>
-          </ul>
-          <svg viewBox="0 0 360 188" role="img" aria-label="BERT 對對照模型:準確率 0.993 對 0.988,precision 0.986 對 0.954,recall 0.960 對 0.954,F1 0.973 對 0.954">
-            <line class="axis" x1="88" y1="4" x2="88" y2="184"/>
-            <text class="lbl" x="80" y="26" text-anchor="end">準確率</text>
-            <rect class="s1" x="88" y="6" width="198.6" height="14" rx="3"><title>BERT 準確率 0.993</title></rect>
-            <text class="val" x="292" y="18">0.993</text>
-            <rect class="s2" x="88" y="22" width="197.6" height="14" rx="3"><title>對照模型 準確率 0.988</title></rect>
-            <text class="val" x="291" y="34">0.988</text>
-            <text class="lbl" x="80" y="74" text-anchor="end">precision</text>
-            <rect class="s1" x="88" y="54" width="197.2" height="14" rx="3"><title>BERT precision 0.986</title></rect>
-            <text class="val" x="291" y="66">0.986</text>
-            <rect class="s2" x="88" y="70" width="190.8" height="14" rx="3"><title>對照模型 precision 0.954</title></rect>
-            <text class="val" x="284" y="82">0.954</text>
-            <text class="lbl" x="80" y="122" text-anchor="end">recall</text>
-            <rect class="s1" x="88" y="102" width="192" height="14" rx="3"><title>BERT recall 0.960</title></rect>
-            <text class="val" x="286" y="114">0.960</text>
-            <rect class="s2" x="88" y="118" width="190.8" height="14" rx="3"><title>對照模型 recall 0.954</title></rect>
-            <text class="val" x="284" y="130">0.954</text>
-            <text class="lbl" x="80" y="170" text-anchor="end">F1</text>
-            <rect class="s1" x="88" y="150" width="194.6" height="14" rx="3"><title>BERT F1 0.973</title></rect>
-            <text class="val" x="288" y="162">0.973</text>
-            <rect class="s2" x="88" y="166" width="190.8" height="14" rx="3"><title>對照模型 F1 0.954</title></rect>
-            <text class="val" x="284" y="178">0.954</text>
-          </svg>
-          <p class="fig-note">垃圾簡訊只有 151 則,差一則 recall 就差約 0.7 個百分點</p>
-        </figure>
+      <div class="card-footer">
+        <div class="stack"><span>PyTorch</span><span>BERT</span><span>TF-IDF</span></div>
+        <div class="card-go">做法與實測結果 <span class="arr" aria-hidden="true">→</span></div>
       </div>
-
-      <p class="links">
-        <a href="https://github.com/johnsonchiang26-dev/sms-spam-detector">原始碼</a>
-        <a href="https://github.com/johnsonchiang26-dev/sms-spam-detector/blob/main/notebooks/03_bert_finetune.ipynb">Notebook(含執行輸出)</a>
-        <a href="https://github.com/johnsonchiang26-dev/sms-spam-detector/blob/main/docs/model_card.md">Model card</a>
-      </p>
     </article>
-  </section>
 
-  <section id="publications" aria-labelledby="pubs-h">
-    <h2 id="pubs-h">論文與著作</h2>
-    <ul class="pubs">
-      <li>
-        <p class="kind">碩士論文 · 2023</p>
-        <p>以知識為基礎之財金時間序列之研究</p>
-        <p class="where">逢甲大學資訊工程學系碩士論文</p>
-      </li>
-      <li>
-        <p class="kind">期刊論文 · 2023 · 第三作者</p>
-        <p lang="en"><a href="https://doi.org/10.6688/JISE.202309_39(5).0006">Design and Implement an Intelligent System for Stock Investment Decision Making</a></p>
-        <p class="where" lang="en">Lee, C. H., Lee, T. J., Chiang, Y. S., Yuan, S. Y., &amp; Liou, J. H. <cite>Journal of Information Science and Engineering</cite>, 39(5), 1101–1116</p>
-      </li>
-      <li>
-        <p class="kind">研討會論文 · 2023 · 第三作者</p>
-        <p>營收資料預測輔助股票投資決策之研究</p>
-        <p class="where">第 21 屆離島資訊技術與應用研討會</p>
-      </li>
-      <li>
-        <p class="kind">期刊論文 · 2022 · 第一作者</p>
-        <p><a href="https://doi.org/10.6212/CPE.202207_23(1).0001">混成式學習應用在程式語言教學之研究:以全校性 Apps 課程為例</a></p>
-        <p class="where"><cite>物理教育學刊</cite>,23(1),1–12</p>
-      </li>
-    </ul>
-  </section>
+  </div>
+</section>
 
-  <section id="contact" aria-labelledby="contact-h">
-    <h2 id="contact-h">聯絡方式</h2>
-    <ul class="contact">
-      <li>Email:<a href="mailto:johnson.chiang26@gmail.com">johnson.chiang26@gmail.com</a></li>
-      <li>GitHub:<a href="https://github.com/johnsonchiang26-dev">github.com/johnsonchiang26-dev</a></li>
-    </ul>
-  </section>
+<div class="wrap"><hr class="rule" /></div>
+
+<section class="section wrap" aria-labelledby="pubs-h">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-heading" id="pubs-h">論文與著作</h2>
+    <div class="section-line"></div>
+    <a class="section-more" href="publications.html">完整出處 →</a>
+  </div>
+
+  <div class="pub">
+    <div class="pub-type thesis">碩士論文</div>
+    <div class="pub-body">
+      <h3>以知識為基礎之財金時間序列之研究</h3>
+      <div class="pub-note">2023</div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="pub-type journal">期刊論文</div>
+    <div class="pub-body">
+      <h3 lang="en">Design and Implement an Intelligent System for Stock Investment Decision Making</h3>
+      <div class="pub-note">2023 · 第三作者</div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="pub-type conf">研討會論文</div>
+    <div class="pub-body">
+      <h3>營收資料預測輔助股票投資決策之研究</h3>
+      <div class="pub-note">2023 · 第三作者</div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="pub-type journal">期刊論文</div>
+    <div class="pub-body">
+      <h3>混成式學習應用在程式語言教學之研究:以全校性 Apps 課程為例</h3>
+      <div class="pub-note">2022 · 第一作者</div>
+    </div>
+  </div>
+</section>
 
 </main>
 
-<footer>
-  <p>姜育昇 · 2026</p>
-</footer>
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <h2 class="contact-heading" id="contact-h">聯絡方式</h2>
+    <div class="contact-row">
+      <a href="mailto:johnson.chiang26@gmail.com" class="btn btn-fill">johnson.chiang26@gmail.com</a>
+    </div>
+    <div class="contact-row" style="margin-top:1.25rem;">
+      <a href="https://github.com/johnsonchiang26-dev" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        github.com/johnsonchiang26-dev
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">姜育昇 · 2026</footer>
 
 </body>
 </html>

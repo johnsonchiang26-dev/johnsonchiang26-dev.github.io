@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>垃圾簡訊分類|姜育昇 Johnson Chiang</title>
+  <meta name="description" content="把英文簡訊分成正常和垃圾(含釣魚)兩類的分類模型:做法、實測結果與原始碼" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<a class="skip" href="#main">跳到主要內容</a>
+
+<nav class="nav" aria-label="主導覽">
+  <div class="nav-inner">
+    <a class="nav-name" href="index.html" lang="en">Johnson Chiang</a>
+    <ul class="nav-links">
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="index.html#projects" aria-current="page">專案</a></li>
+      <li><a href="publications.html">論文</a></li>
+      <li><a href="#contact">聯絡</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+
+<nav class="crumbs wrap" aria-label="麵包屑">
+  <ol>
+    <li><a href="index.html">首頁</a></li>
+    <li><a href="index.html#projects">公開專案</a></li>
+    <li aria-current="page">垃圾簡訊分類</li>
+  </ol>
+</nav>
+
+<header class="page-head wrap">
+  <span class="chip" lang="en">sms-spam-detector</span>
+  <h1>垃圾簡訊分類</h1>
+  <p class="lead">把英文簡訊分成正常和垃圾(含釣魚)兩類的分類模型</p>
+  <div class="actions">
+    <a href="https://github.com/johnsonchiang26-dev/sms-spam-detector" class="btn btn-fill">原始碼 <span class="arr" aria-hidden="true">↗</span></a>
+    <a href="https://github.com/johnsonchiang26-dev/sms-spam-detector/blob/main/notebooks/03_bert_finetune.ipynb" class="btn btn-outline">Notebook(含執行輸出)</a>
+    <a href="https://github.com/johnsonchiang26-dev/sms-spam-detector/blob/main/docs/model_card.md" class="btn btn-outline">Model card</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <ul class="stats">
+    <li><strong>1,118</strong><span>則測試集</span></li>
+    <li><strong>0.993</strong><span>準確率</span></li>
+    <li><strong>0.986</strong><span>precision</span></li>
+    <li><strong>0.960</strong><span>recall</span></li>
+    <li><strong>0.973</strong><span>F1</span></li>
+  </ul>
+</div>
+
+<section class="section wrap" aria-labelledby="how-h">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-heading" id="how-h">做法與結果</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="row">
+    <div class="row-label">怎麼做</div>
+    <div class="row-body">用 PyTorch 自己寫訓練迴圈微調 bert-base-uncased,資料是 UCI 公開的 5,574 則簡訊加 15 則手寫範例,另外訓練 TF-IDF 加邏輯迴歸當對照</div>
+  </div>
+  <div class="row">
+    <div class="row-label">實測結果</div>
+    <div class="row-body">測試集 1,118 則,準確率 0.993、precision 0.986、recall 0.960、F1 0.973;測試集沒有去重,約一成和訓練集的文字相同</div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule" /></div>
+
+<section class="section wrap" aria-labelledby="charts-h">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-heading" id="charts-h">圖表</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="charts">
+    <figure class="chart">
+      <figcaption>判錯的則數(測試集 1,118 則,其中垃圾簡訊 151 則)</figcaption>
+      <ul class="legend">
+        <li><i class="s1"></i>BERT</li>
+        <li><i class="s2"></i>TF-IDF 加邏輯迴歸</li>
+      </ul>
+      <svg viewBox="0 0 360 100" role="img" aria-label="判錯則數:漏掉的垃圾簡訊 BERT 6 則、對照模型 7 則;誤判的正常簡訊 BERT 2 則、對照模型 7 則">
+        <line class="axis" x1="124" y1="4" x2="124" y2="96"/>
+        <text class="lbl" x="116" y="26" text-anchor="end">漏掉的垃圾簡訊</text>
+        <rect class="s1" x="124" y="6" width="150" height="14" rx="2"><title>BERT 漏掉 6 則</title></rect>
+        <text class="val" x="280" y="18">6</text>
+        <rect class="s2" x="124" y="22" width="175" height="14" rx="2"><title>對照模型 漏掉 7 則</title></rect>
+        <text class="val" x="305" y="34">7</text>
+        <text class="lbl" x="116" y="78" text-anchor="end">誤判的正常簡訊</text>
+        <rect class="s1" x="124" y="58" width="50" height="14" rx="2"><title>BERT 誤判 2 則</title></rect>
+        <text class="val" x="180" y="70">2</text>
+        <rect class="s2" x="124" y="74" width="175" height="14" rx="2"><title>對照模型 誤判 7 則</title></rect>
+        <text class="val" x="305" y="86">7</text>
+      </svg>
+      <p class="fig-note">BERT 抓到 151 則垃圾簡訊中的 145 則,對照模型抓到 144 則</p>
+    </figure>
+
+    <figure class="chart">
+      <figcaption>四項指標對照</figcaption>
+      <ul class="legend">
+        <li><i class="s1"></i>BERT</li>
+        <li><i class="s2"></i>TF-IDF 加邏輯迴歸</li>
+      </ul>
+      <svg viewBox="0 0 360 188" role="img" aria-label="BERT 對對照模型:準確率 0.993 對 0.988,precision 0.986 對 0.954,recall 0.960 對 0.954,F1 0.973 對 0.954">
+        <line class="axis" x1="88" y1="4" x2="88" y2="184"/>
+        <text class="lbl" x="80" y="26" text-anchor="end">準確率</text>
+        <rect class="s1" x="88" y="6" width="198.6" height="14" rx="2"><title>BERT 準確率 0.993</title></rect>
+        <text class="val" x="292" y="18">0.993</text>
+        <rect class="s2" x="88" y="22" width="197.6" height="14" rx="2"><title>對照模型 準確率 0.988</title></rect>
+        <text class="val" x="291" y="34">0.988</text>
+        <text class="lbl" x="80" y="74" text-anchor="end">precision</text>
+        <rect class="s1" x="88" y="54" width="197.2" height="14" rx="2"><title>BERT precision 0.986</title></rect>
+        <text class="val" x="291" y="66">0.986</text>
+        <rect class="s2" x="88" y="70" width="190.8" height="14" rx="2"><title>對照模型 precision 0.954</title></rect>
+        <text class="val" x="284" y="82">0.954</text>
+        <text class="lbl" x="80" y="122" text-anchor="end">recall</text>
+        <rect class="s1" x="88" y="102" width="192" height="14" rx="2"><title>BERT recall 0.960</title></rect>
+        <text class="val" x="286" y="114">0.960</text>
+        <rect class="s2" x="88" y="118" width="190.8" height="14" rx="2"><title>對照模型 recall 0.954</title></rect>
+        <text class="val" x="284" y="130">0.954</text>
+        <text class="lbl" x="80" y="170" text-anchor="end">F1</text>
+        <rect class="s1" x="88" y="150" width="194.6" height="14" rx="2"><title>BERT F1 0.973</title></rect>
+        <text class="val" x="288" y="162">0.973</text>
+        <rect class="s2" x="88" y="166" width="190.8" height="14" rx="2"><title>對照模型 F1 0.954</title></rect>
+        <text class="val" x="284" y="178">0.954</text>
+      </svg>
+      <p class="fig-note">垃圾簡訊只有 151 則,差一則 recall 就差約 0.7 個百分點</p>
+    </figure>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule" /></div>
+
+<nav class="section wrap" aria-label="其他頁面">
+  <div class="pager">
+    <a class="prev" href="malicious-url-detector.html"><small>← 上一個專案</small><span>惡意網址分類</span></a>
+    <a class="next" href="publications.html"><small>接著看 →</small><span>論文與著作</span></a>
+  </div>
+</nav>
+
+</main>
+
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <h2 class="contact-heading" id="contact-h">聯絡方式</h2>
+    <div class="contact-row">
+      <a href="mailto:johnson.chiang26@gmail.com" class="btn btn-fill">johnson.chiang26@gmail.com</a>
+    </div>
+    <div class="contact-row" style="margin-top:1.25rem;">
+      <a href="https://github.com/johnsonchiang26-dev" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        github.com/johnsonchiang26-dev
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">姜育昇 · 2026</footer>
+
+</body>
+</html>
